@@ -1,1 +1,1 @@
-# CCDC
+# Coastline College CCDC Repository
