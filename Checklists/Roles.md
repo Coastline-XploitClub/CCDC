@@ -2,7 +2,7 @@
 
 ## Windows
 
-- ### Vinh
+- ### Cameron
 
   - [ ] Identify the Domain Controller and create an administrative user account for yourself.
   - [ ] Identify any additional users on the domain and document their usernames.
@@ -14,7 +14,7 @@
     - [ ] Submit a change request form for any changes made to the domain.
   - [ ] Identify the hostname and IP addresses of the Domain Controller and document them.
 
-- ### Alvin
+- ### Joseph
 
   - [ ] Identify the Windows Clients and create an administrative user account for yourself.
   - [ ] Identify additional users on the Windows Clients and document their usernames.
@@ -25,7 +25,7 @@
 
 ## Linux
 
-- ### Loren
+- ### Jennifer
 
   - [ ] Identify the Linux Servers and create an administrative user account for yourself.
   - [ ] Identify any additional users on the Linux Servers and document their usernames.
@@ -33,10 +33,13 @@
     - [ ] Submit a change request form for any changes made to the Linux Servers.
   - [ ] Identify any services running on the Linux Servers and document their names.
   - [ ] Identify the hostname and IP addresses of the Linux Servers and document them.
-  - [ ] Setup Kibana and ElasticSearch on host machine?
-    - [ ] Ask at meeting if we can install anything on jump boxes including Kibana and ElasticSearch
+  # - [ ] Setup Kibana and ElasticSearch on host machine?
+  #  - [ ] Ask at meeting if we can install anything on jump boxes including Kibana and ElasticSearch
+  - [ ] Identify kubernetes host machine using kubectl
+    - [ ] Identify running containers with hostnames and IP addresses
+    - [ ] Identify services hosted on Docker
 
-- ### Cameron
+- ### Thomas
 
   - [ ] Identify the Linux Clients and create an administrative user account for yourself.
   - [ ] Identify any additional users on the Linux Clients and document their usernames.
@@ -44,30 +47,32 @@
     - [ ] Submit a change request form for any changes made to the Linux Clients.
   - [ ] Identify any services running on the Linux Clients and document their names.
   - [ ] Identify the hostname and IP addresses of the Linux Clients and document them.
-  - [ ] Gather list of hostname and IP addresses from Loren, Vinh, Alvin and create firewall rules to allow traffic between the hosts and disable all other traffic.
+
+## Networking / Firewall
+
+### Aaron
+  - [ ] Change default password ASAP.
+  - [ ] Create new admin user and disable original "admin" user.
+  - [ ] Disable SSH access to Firewall. 
+  - [ ] Allow access to pfSense web interface from only 1 IP Address (your jumpbox).
+  - [ ] Work on establishing firewall rules given hostnames and IP addresses from team, time permitting.
 
 ## Business Injects
 
-- ### Spencer
+- ### Seon
 
-  - [ ] Track active business injects and document the Goal and Due Time for each (Add to whiteboard)
-  - [ ] Prioritize business injects and assign to team members
-  - [ ] Communicate all change requests to Ops Team on behalf of the team
-  - [ ] Notify team of any changes to the competition environment communicated in Discords
-  - [ ] Primary responsibility is managing the business injects and ensuring that they are completed on time
-
-- ### Bryan
-
-- [ ] Execute on business injects assigned by Spencer with assistance from the rest of the team
-- [ ] Format information gathered from the rest of the team into a business inject report
-- [ ] Deliver draft report to Spencer and Mike for final review (This is meant to be collaborative)
-- [ ] Primary responsibility is completing assigned business injects by gathering required information from the rest of the team.
+  - [ ] Track active business injects and document the Goal and Due Time for each (Add to whiteboard).
+  - [ ] Prioritize business injects and assign to appropriate team members.
+  - [ ] Communicate all change requests to Ops Team on behalf of the team.
+  - [ ] Notify team of any changes to the competition environment communicated in Mantis Ticketing system.
+  - [ ] Primary responsibility is managing the business injects and ensuring that they are completed on time.
+  - [ ] Format information gathered from the rest of the team into a business inject report
 
 ## Incident Response / Threat Hunting
 
-- ### Brent / Terrie
-
-  - [ ] Begin monitoring the network for suspicious activity
+- ### Brent
+  - [ ] Scan environment for all hostnames/IP addresses.
+  - [ ] Begin monitoring the network for suspicious activity.
     - [ ] Nmap scan of all hosts
     - [ ] Nessus or other vuln scanning tools
     - [ ] Work closely with Loren on the ability to monitor the Kibana logs. You should have access and know how to query the logs.
@@ -75,23 +80,3 @@
     - [ ] Use draft incident response report to document the incident
   - [ ] Eternal Blue:
     - [ ] Wireshark signatures and search parameters to identify Cobalt Strike Beacons
-
-- ### Mike
-
-  - [ ] Manage the incident response process
-    - [ ] Assign incident response tasks to team members
-    - [ ] Review draft incident response reports and provide feedback
-    - [ ] Review final incident response reports and provide feedback
-    - [ ] Communicate incident response reports to Spencer for forwarding to Ops Team
-  - [ ] Eternal Blue:
-    - [ ] Bluespawn as a defense to Cobalt Strike. <https://bluespawn.cloud/en/develop/>
-  - [ ] General team management
-
-## TODO
-
-- [ ] Create a standard format for documenting the usernames, hostnames, IP addresses, and other information gathered by each team member.
-- [ ] Modify and update Windows Hardening checklist
-- [ ] Modify and update Linux Hardening checklist
-- [ ] Develop standard format for submitting change requests
-- [ ] Finalize format of business inject responses.
-- [ ] Create **_cheatsheet_** for Kibana and Elastic
