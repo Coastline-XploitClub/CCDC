@@ -33,8 +33,6 @@
     - [ ] Submit a change request form for any changes made to the Linux Servers.
   - [ ] Identify any services running on the Linux Servers and document their names.
   - [ ] Identify the hostname and IP addresses of the Linux Servers and document them.
-  # - [ ] Setup Kibana and ElasticSearch on host machine?
-  #  - [ ] Ask at meeting if we can install anything on jump boxes including Kibana and ElasticSearch
   - [ ] Identify kubernetes host machine using kubectl
     - [ ] Identify running containers with hostnames and IP addresses
     - [ ] Identify services hosted on Docker
