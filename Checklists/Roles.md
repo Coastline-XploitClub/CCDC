@@ -14,6 +14,7 @@
     - [ ] Submit a change request form for any changes made to the domain.
   - [ ] Identify the hostname and IP addresses of the Domain Controller and document them.
   - [ ] Add Kerberos Audit Logging to Windows Event Log through group policy
+  - [ ] Check Default Password Policy via Group Policy
 - ### Joseph
 
   - [ ] Identify the Windows Clients and create an administrative user account for yourself.
