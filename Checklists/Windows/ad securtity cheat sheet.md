@@ -11,3 +11,7 @@ $nopre=Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} -Properties DoesNotR
 Loop through and change to false
 
 foreach ($pre in $nopre) { Set-ADAccountControl -Id $pre.SamAccountName -DoesNotRequirePreAuth:$false}
+
+# check for users with Service Pricipal Names associated
+
+Get-ADUser -Filter "servicePrincipalName -like '*'" -Properties servicePrincipalname
