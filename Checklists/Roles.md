@@ -15,6 +15,8 @@
   - [ ] Identify the hostname and IP addresses of the Domain Controller and document them.
   - [ ] Add Kerberos Audit Logging to Windows Event Log through group policy
   - [ ] Check Default Password Policy via Group Policy
+  - [ ] Find users with pre-auth disabled (Kerberos) and enable
+  - [ ] Find users with Service Principal Names (SPN) and document.  
 - ### Joseph
 
   - [ ] Identify the Windows Clients and create an administrative user account for yourself.
