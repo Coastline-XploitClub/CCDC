@@ -10,6 +10,7 @@
     - <https://www.sans.org/tools/ez-tools/>
     - <https://www.sans.org/posters/eric-zimmerman-tools-cheat-sheet/>
     - <https://reconshell.com/incident-response-resources/>
+[Incident Response Resources](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/)
 
 ## Netbios countermeasures
 
