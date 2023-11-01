@@ -16,7 +16,8 @@
   - [ ] Add Kerberos Audit Logging to Windows Event Log through group policy
   - [ ] Check Default Password Policy via Group Policy
   - [ ] Find users with pre-auth disabled (Kerberos) and enable
-  - [ ] Find users with Service Principal Names (SPN) and document.  
+  - [ ] Find users with Service Principal Names (SPN) and document.
+        
 - ### Joseph
 
   - [ ] Identify the Windows Clients and create an administrative user account for yourself.
@@ -25,6 +26,10 @@
     - [ ] Submit a change request form for any changes made to the Windows Clients.
   - [ ] Identify any services running on the Windows Clients and document their names.
   - [ ] Identify the hostname and IP addresses of the Windows Clients and document them.
+  - [ ] Enable Domain Password Policy via Group Policy (Computer Configuration/Policies/Windows Settings/Security Settings/Account Policies)
+  - [ ] Enable UAC for all Users via Group Policy (Computer Configuration /Policies /Windows Settings / Security Settings / Local Policies/ Security Options)
+  - [ ] Enable Account Lockout Policy (Computer Configuration/Policies/ Windows Settings/ Security Settings/Account Policies)
+  - [ ] 
 
 ## Linux
 
