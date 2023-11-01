@@ -10,6 +10,6 @@
 - services.msc
 - Get-Service
 ## Winevent viewer
-''' Get-EventLog -LogName Security -InstanceID 4765 -EntryType FailureAudit '''
+``` Get-EventLog -LogName Security -InstanceID 4765 -EntryType FailureAudit ```
 ## View Listening Ports
 ``` Get-NetTCPConnection | select LocalPort, State | Where-Object -Property -eq 'Listening' ```
