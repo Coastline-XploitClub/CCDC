@@ -88,3 +88,6 @@ PORT    STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 48.27 seconds
 ```
+@everyone DEFAULT PASSWORD IS `GibM3Money123!`
+
+Good luck to all! The competition officially begins now 🙂
