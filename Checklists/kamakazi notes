@@ -1,0 +1,8 @@
+kamakazi
+
+postfix 25
+nginx 80
+msqld 3306
+ssh 22
+
+password changed
