@@ -38,7 +38,7 @@ msqld 3306
 | mysql              |
 | performance_schema |
 | roundcubemail
-
+looks like my.cnf in /etc is the configuration file 
 ssh 22
 
 password changed
