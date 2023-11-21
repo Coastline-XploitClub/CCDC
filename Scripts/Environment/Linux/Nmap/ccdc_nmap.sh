@@ -192,6 +192,7 @@ main() {
     is_software_installed
     create_output_dir
     initial_scan
+    extract_hosts
     extract_ports 
     aggressive_scan
     all_port_scan
