@@ -6,8 +6,8 @@ create_log_files() {
     if [ ! -d "nmap_logs" ]; then
         mkdir nmap_logs
     fi
-    touch logs/nmap_errors.log
-    touch logs/nmap_output.log
+    touch nmap_logs/nmap_errors.log
+    touch nmap_logs/nmap_output.log
 }
 
 # Display help menu with -h or --help
