@@ -90,37 +90,65 @@ is_nmap_installed() {
     fi
 }
 
-
-# Nmap scan definitions
-# Scan 1: Default scan of subnet given as argument
-initial_scan() {
-    nmap -sV -T4 -oA nmap_logs/initial_scan --min-rate 1000 --stats-every=5s $1 
+# Create output directory if it doesn't exist
+create_output_dir() {
+    if [ ! -d "$OUTPUT" ]; then
+        mkdir -p $OUTPUT
+    fi
 }
 
-# Extract ports from initial scan
+# Scan 1: Default scan of subnet given as argument
+initial_scan() {
+    nmap --min-rate 1000 --stats-every=5s -oA $OUTPUT/initial_scan $SUBNET
+}
+
+# Extract ports from initial scan gmap file
 extract_ports() {
-    grep -oP '\d{1,5}/open' nmap_logs/initial_scan.gnmap | cut -d '/' -f 1 | tr '\n' ',' | sed s/,$//
+    grep -oP '(?<=portid=")\d+' $OUTPUT/initial_scan.gnmap | sort | uniq | tr '\n' ',' | sed 's/.$//' > $OUTPUT/ports.txt
 }
 
 # Scan 2: Aggressive scan of ports found in initial scan
 aggressive_scan() {
-    nmap -p $1 -A --script vuln -T4 -oA nmap_logs/aggressive_scan --min-rate 1000 --stats-every=5s $2
+    nmap -A --script vuln --min-rate 1000 --stats-every=5s -p $(cat $OUTPUT/ports.txt) -oA $OUTPUT/aggressive_scan $SUBNET
 }
 
 # Scan 3: Scan for all ports
 all_port_scan() {
-    nmap -p- -T4 -oA nmap_logs/all_ports --min-rate 1000 --stats-every=5s $1
+    nmap -p- --min-rate 1000 --stats-every=5s -oA $OUTPUT/all_port_scan $SUBNET
 }
 
 # Scan 4: Aggressive scan of all ports
 aggressive_all_port_scan() {
-    nmap -p- -A --script vuln -T4 -oA nmap_logs/aggressive_all_ports --min-rate 1000 --stats-every=5s $1
+    nmap -A --script vuln --min-rate 1000 --stats-every=5s -p- -oA $OUTPUT/aggressive_all_port_scan $SUBNET
 }
 
 # Convert all xml results to html
 convert_to_html() {
-    xsltproc nmap_logs/initial_scan.xml -o nmap_logs/initial_scan.html
-    xsltproc nmap_logs/aggressive_scan.xml -o nmap_logs/aggressive_scan.html
-    xsltproc nmap_logs/all_ports.xml -o nmap_logs/all_ports.html
-    xsltproc nmap_logs/aggressive_all_ports.xml -o nmap_logs/aggressive_all_ports.html
+    for file in $OUTPUT/*.xml; do
+        xsltproc -o $file.html $file
+    done
+}
+
+# Print final results including brief summary and html files created
+print_results() {
+    echo "Results saved to $OUTPUT"
+    echo "HTML files created:"
+    for file in $OUTPUT/*.html; do
+        echo $file
+    done
+}
+
+# Main function
+main() {
+    is_root
+    check_args "$@"
+    is_nmap_installed
+    create_output_dir
+    initial_scan
+    extract_ports
+    aggressive_scan
+    all_port_scan
+    aggressive_all_port_scan
+    convert_to_html
+    print_results
 }
