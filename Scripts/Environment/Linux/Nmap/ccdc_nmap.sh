@@ -124,6 +124,8 @@ extract_hosts() {
     echo "Entering extract_hosts function..." # Debug
     grep -oP '(?<=Host: )\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' $OUTPUT/initial_scan.gnmap | sort | uniq | tr '\n' ',' | sed 's/.$//' > $OUTPUT/hosts.txt
     echo "Hosts extracted. Leaving extract_hosts function..." # Debug
+    echo "Printing hosts..." # Debug
+    cat $OUTPUT/hosts.txt # Debug
     read -p "Press Enter to continue after extract_hosts..." # Debug
 }
 
