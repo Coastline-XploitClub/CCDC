@@ -114,7 +114,7 @@ create_output_dir() {
 # Scan 1: Default scan of subnet given as argument
 initial_scan() {
     echo "Entering initial_scan function..." # Debug
-    nmap -Pn --min-rate 5000 --stats-every=5s -oA $OUTPUT/initial_scan $SUBNET
+    nmap --min-rate 5000 --stats-every=5s -oA $OUTPUT/initial_scan $SUBNET
     echo "Initial scan completed. Leaving initial_scan function..." # Debug
     read -p "Press Enter to continue after initial_scan..." # Debug
 }
