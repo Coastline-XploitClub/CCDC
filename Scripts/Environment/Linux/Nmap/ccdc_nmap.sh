@@ -9,11 +9,18 @@ is_root() {
     fi
 }
 
-# Ensure nmap is installed
+# Ensure nmap and xsltproc are installed
 is_nmap_installed() {
     if ! [ -x "$(command -v nmap)" ]; then
         echo "Error: nmap is not installed." >&2
-        exit 1 2>&1
+        echo "Installing nmap now..."
+        apt update && apt install nmap -y
+    fi
+
+    if ! [ -x "$(command -v xsltproc)" ]; then
+        echo "Error: xsltproc is not installed." >&2
+        echo "Installing xsltproc now..."
+        apt update && apt install xsltproc -y
     fi
 }
 
@@ -27,7 +34,6 @@ create_log_files() {
 }
 
 # Nmap scan definitions
-
 # Scan 1: Default scan of subnet given as argument
 initial_scan() {
     nmap -sV -T4 -oA nmap_logs/initial_scan --min-rate 1000 --stats-every=5s $1
