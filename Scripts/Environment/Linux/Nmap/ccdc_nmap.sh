@@ -1,29 +1,6 @@
 #!/bin/bash
 # This script runs the following nmap scans, in order, and outputs the results to a directory for further processing:
 
-# Ensure running as root
-is_root() {
-    if [ "$EUID" -ne 0 ]; then
-        echo "Please run as root" >&2
-        exit 1 2>&1
-    fi
-}
-
-# Ensure nmap and xsltproc are installed
-is_nmap_installed() {
-    if ! [ -x "$(command -v nmap)" ]; then
-        echo "Error: nmap is not installed." >&2
-        echo "Installing nmap now..."
-        apt update && apt install nmap -y
-    fi
-
-    if ! [ -x "$(command -v xsltproc)" ]; then
-        echo "Error: xsltproc is not installed." >&2
-        echo "Installing xsltproc now..."
-        apt update && apt install xsltproc -y
-    fi
-}
-
 # Create log files, 1 for errors and 1 for output
 create_log_files() {
     if [ ! -d "nmap_logs" ]; then
@@ -33,10 +10,50 @@ create_log_files() {
     touch logs/nmap_output.log
 }
 
+# Display help menu with -h or --help
+display_help() {
+    echo "Usage: $0 [subnet]"
+    echo "Options:"
+    echo "  -h, --help      Display help menu"
+}
+
+# Ensure subnet is given as argument
+is_subnet_given() {
+    if [ -z "$1" ]; then
+        echo "Error: No subnet given."
+        display_help
+        exit 1
+    fi
+}
+
+# Ensure running as root
+is_root() {
+    if [ "$EUID" -ne 0 ]; then
+        echo "Please run as root"
+        exit 1
+    fi
+}
+
+# Ensure nmap and xsltproc are installed
+is_nmap_installed() {
+    if ! [ -x "$(command -v nmap)" ]; then
+        echo "Error: nmap is not installed." 
+        echo "Installing nmap now..."
+        apt update && apt install nmap -y
+    fi
+
+    if ! [ -x "$(command -v xsltproc)" ]; then
+        echo "Error: xsltproc is not installed." 
+        echo "Installing xsltproc now..."
+        apt update && apt install xsltproc -y
+    fi
+}
+
+
 # Nmap scan definitions
 # Scan 1: Default scan of subnet given as argument
 initial_scan() {
-    nmap -sV -T4 -oA nmap_logs/initial_scan --min-rate 1000 --stats-every=5s $1
+    nmap -sV -T4 -oA nmap_logs/initial_scan --min-rate 1000 --stats-every=5s $1 
 }
 
 # Extract ports from initial scan
