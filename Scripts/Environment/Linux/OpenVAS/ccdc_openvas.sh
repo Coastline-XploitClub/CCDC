@@ -2,7 +2,12 @@
 
 # Display help menu with -h or --help
 display_help() {
-    echo "Usage: $0 [option...] {download|install|configure}"
+    echo "CCDC OpenVAS Script"
+    echo "-------------------"
+    echo
+    echo "This script will download, install, and configure OpenVAS."
+    echo
+    echo "Usage: $0 [option...]"
     echo
     echo "   -h, --help                 Show this help message"
     echo "   -d, --download             Download OpenVAS"
@@ -55,8 +60,17 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-main() {
-    check_root
+# Download OpenVAS
+download_openvas() {
+    echo "Downloading OpenVAS..."
 }
 
-main "$@"
+# Install OpenVAS
+install_openvas() {
+    echo "Installing OpenVAS..."
+}
+
+# Configure OpenVAS
+configure_openvas() {
+    echo "Configuring OpenVAS..."
+}
