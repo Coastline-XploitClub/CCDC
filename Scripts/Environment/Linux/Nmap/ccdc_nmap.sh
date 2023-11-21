@@ -9,7 +9,6 @@ display_help() {
     echo "  -o, --output    Output directory"
 }
 
-
 # Ensure subnet and output directory given as arguments. If not, display help
 check_args() {
     echo "Entering check_args function..." # Debug
@@ -19,7 +18,7 @@ check_args() {
     fi
 
     echo "Parsing arguments..." # Debug
-    
+
     while [ $# -gt 0 ]; do
         case "$1" in
             -h|--help)
@@ -58,8 +57,8 @@ check_args() {
         esac
         shift
     done
-    echo "Leaving check_args function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Arguments parsed. Leaving check_args function..." # Debug
+    read -p "Press Enter to continue after check_args..." # Debug
     if [ -z "$SUBNET" ]; then
         printf 'ERROR: "--subnet" requires a non-empty option argument.\n' >&2
         exit 1
@@ -76,11 +75,11 @@ is_root() {
     echo "Entering is_root function..." # Debug
     if [ "$EUID" -ne 0 ]; then
         echo "Please run as root"
-        read -p "Press Enter to continue..." # Debug
+        read -p "Press Enter to continue after is_root if not root..." # Debug
         exit 1
     fi
-    echo "Leaving is_root function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Root check passed. Leaving is_root function..." # Debug
+    read -p "Press Enter to continue after is_root..." # Debug
 }
 
 # Ensure nmap and xsltproc are installed
@@ -91,15 +90,15 @@ is_software_installed() {
         echo "Installing nmap now..."
         apt update && apt install nmap -y
     fi
-    echo "nmap is installed." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "nmap installation confirmed. Checking xsltproc..." # Debug
+    read -p "Press Enter to continue after nmap check in is_software_installed..." # Debug
     if ! [ -x "$(command -v xsltproc)" ]; then
         echo "Error: xsltproc is not installed." 
         echo "Installing xsltproc now..."
         apt update && apt install xsltproc -y
     fi
-    echo "xsltproc is installed." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "xsltproc installation confirmed. Leaving is_software_installed function..." # Debug
+    read -p "Press Enter to continue after is_software_installed..." # Debug
 }
 
 # Create output directory if it doesn't exist
@@ -108,48 +107,48 @@ create_output_dir() {
     if [ ! -d "$OUTPUT" ]; then
         mkdir -p $OUTPUT
     fi
-    echo "Leaving create_output_dir function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Output directory created/confirmed. Leaving create_output_dir function..." # Debug
+    read -p "Press Enter to continue after create_output_dir..." # Debug
 }
 
 # Scan 1: Default scan of subnet given as argument
 initial_scan() {
     echo "Entering initial_scan function..." # Debug
     nmap --min-rate 1000 --stats-every=5s -oA $OUTPUT/initial_scan $SUBNET
-    echo "Leaving initial_scan function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Initial scan completed. Leaving initial_scan function..." # Debug
+    read -p "Press Enter to continue after initial_scan..." # Debug
 }
 
 # Extract ports from initial scan gmap file
 extract_ports() {
     echo "Entering extract_ports function..." # Debug
     grep -oP '(?<=portid=")\d+' $OUTPUT/initial_scan.gnmap | sort | uniq | tr '\n' ',' | sed 's/.$//' > $OUTPUT/ports.txt
-    echo "Leaving extract_ports function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Ports extracted. Leaving extract_ports function..." # Debug
+    read -p "Press Enter to continue after extract_ports..." # Debug
 }
 
 # Scan 2: Aggressive scan of ports found in initial scan
 aggressive_scan() {
     echo "Entering aggressive_scan function..." # Debug
     nmap -A --script vuln --min-rate 1000 --stats-every=5s -p $(cat $OUTPUT/ports.txt) -oA $OUTPUT/aggressive_scan $SUBNET
-    echo "Leaving aggressive_scan function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Aggressive scan completed. Leaving aggressive_scan function..." # Debug
+    read -p "Press Enter to continue after aggressive_scan..." # Debug
 }
 
 # Scan 3: Scan for all ports
 all_port_scan() {
     echo "Entering all_port_scan function..." # Debug
     nmap -p- --min-rate 1000 --stats-every=5s -oA $OUTPUT/all_port_scan $SUBNET
-    echo "Leaving all_port_scan function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "All port scan completed. Leaving all_port_scan function..." # Debug
+    read -p "Press Enter to continue after all_port_scan..." # Debug
 }
 
 # Scan 4: Aggressive scan of all ports
 aggressive_all_port_scan() {
     echo "Entering aggressive_all_port_scan function..." # Debug
     nmap -A --script vuln --min-rate 1000 --stats-every=5s -p- -oA $OUTPUT/aggressive_all_port_scan $SUBNET
-    echo "Leaving aggressive_all_port_scan function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Aggressive all port scan completed. Leaving aggressive_all_port_scan function..." # Debug
+    read -p "Press Enter to continue after aggressive_all_port_scan..." # Debug
 }
 
 # Convert all xml results to html
@@ -158,8 +157,8 @@ convert_to_html() {
     for file in $OUTPUT/*.xml; do
         xsltproc -o $file.html $file
     done
-    echo "Leaving convert_to_html function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "XML to HTML conversion done. Leaving convert_to_html function..." # Debug
+    read -p "Press Enter to continue after convert_to_html..." # Debug
 }
 
 # Print final results including brief summary and html files created
@@ -170,45 +169,26 @@ print_results() {
     for file in $OUTPUT/*.html; do
         echo $file
     done
-    echo "Leaving print_results function..." # Debug
-    read -p "Press Enter to continue..." # Debug
+    echo "Results printed. Leaving print_results function..." # Debug
+    read -p "Press Enter to continue after print_results..." # Debug
 }
 
 # Main function
 main() {
-    echo "Checking for root privileges..." # Debug
+    echo "Starting script execution..." # Debug
+    read -p "Press Enter to begin..." # Debug
     is_root
-    read -p "Press Enter to continue..." # Debug
-    echo "Checking for arguments..." # Debug
     check_args "$@"
-    read -p "Press Enter to continue..." # Debug
-    echo "Checking for nmap and xsltproc..." # Debug
     is_software_installed
-    read -p "Press Enter to continue..." # Debug
-    echo "Creating output directory..." # Debug
     create_output_dir
-    read -p "Press Enter to continue..." # Debug
-    echo "Performing initial scan on subnet $SUBNET..." # Debug
     initial_scan
-    read -p "Press Enter to continue..." # Debug
-    echo "Extracting ports from initial scan..." # Debug
     extract_ports 
-    read -p "Press Enter to continue..." # Debug
-    echo "Performing aggressive scan on ports found in initial scan..." # Debug
     aggressive_scan
-    read -p "Press Enter to continue..." # Debug
-    echo "Performing scan on all ports for subnet $SUBNET..." # Debug
     all_port_scan
-    read -p "Press Enter to continue..." # Debug
-    echo "Performing aggressive scan on all ports for subnet $SUBNET..." # Debug
     aggressive_all_port_scan
-    read -p "Press Enter to continue..." # Debug
-    echo "Converting all xml results to html..." # Debug
     convert_to_html
-    read -p "Press Enter to continue..." # Debug
-    echo "Printing results..." # Debug
     print_results
-    read -p "Press Enter to continue..." # Debug
+    echo "Script execution completed." # Debug
 }
 
 main "$@"
