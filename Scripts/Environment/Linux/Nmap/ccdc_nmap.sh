@@ -114,7 +114,7 @@ create_output_dir() {
 # Scan 1: Default scan of subnet given as argument
 initial_scan() {
     echo "Entering initial_scan function..." # Debug
-    nmap --min-rate 5000 --stats-every=5s -oA $OUTPUT/initial_scan $SUBNET
+    nmap --min-rate 1000 --stats-every=5s -oA $OUTPUT/initial_scan $SUBNET
     echo "Initial scan completed. Leaving initial_scan function..." # Debug
     read -p "Press Enter to continue after initial_scan..." # Debug
 }
@@ -124,8 +124,6 @@ extract_hosts() {
     echo "Entering extract_hosts function..." # Debug
     grep -oP '(?<=Host: )\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' $OUTPUT/initial_scan.gnmap | sort | uniq | tr '\n' ',' | sed 's/.$//' > $OUTPUT/hosts.txt
     echo "Hosts extracted. Leaving extract_hosts function..." # Debug
-    echo "Displaying hosts.txt..." # Debug
-    cat $OUTPUT/hosts.txt # Debug
     read -p "Press Enter to continue after extract_hosts..." # Debug
 }
 
