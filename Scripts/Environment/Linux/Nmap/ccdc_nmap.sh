@@ -1,27 +1,68 @@
 #!/bin/bash
-# This script runs the following nmap scans, in order, and outputs the results to a directory for further processing:
-
-# Create log files, 1 for errors and 1 for output
-create_log_files() {
-    if [ ! -d "nmap_logs" ]; then
-        mkdir nmap_logs
-    fi
-    touch nmap_logs/nmap_errors.log
-    touch nmap_logs/nmap_output.log
-}
 
 # Display help menu with -h or --help
 display_help() {
-    echo "Usage: $0 [subnet]"
+    echo "Usage: $0 [subnet] [output directory]"
     echo "Options:"
-    echo "  -h, --help      Display help menu"
+    echo "  -h, --help      Display this help menu"
+    echo "  -s, --subnet    Subnet to scan"
+    echo "  -o, --output    Output directory"
 }
 
-# Ensure subnet is given as argument
-is_subnet_given() {
-    if [ -z "$1" ]; then
-        echo "Error: No subnet given."
+
+# Ensure subnet and output directory given as arguments. If not, display help
+check_args() {
+    if [ $# -eq 0 ]; then
         display_help
+        exit 1
+    fi
+
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            -h|--help)
+                display_help
+                exit 0
+                ;;
+            -s|--subnet)
+                if [ -n "$2" ]; then
+                    SUBNET=$2
+                    shift
+                else
+                    printf 'ERROR: "--subnet" requires a non-empty option argument.\n' >&2
+                    exit 1
+                fi
+                ;;
+            -o|--output)
+                if [ -n "$2" ]; then
+                    OUTPUT=$2
+                    shift
+                else
+                    printf 'ERROR: "--output" requires a non-empty option argument.\n' >&2
+                    exit 1
+                fi
+                ;;
+            --)
+                shift
+                break
+                ;;
+            -*)
+                printf 'ERROR: Unknown option: %s\n' "$1" >&2
+                exit 1
+                ;;
+            *)
+                break
+                ;;
+        esac
+        shift
+    done
+
+    if [ -z "$SUBNET" ]; then
+        printf 'ERROR: "--subnet" requires a non-empty option argument.\n' >&2
+        exit 1
+    fi
+
+    if [ -z "$OUTPUT" ]; then
+        printf 'ERROR: "--output" requires a non-empty option argument.\n' >&2
         exit 1
     fi
 }
