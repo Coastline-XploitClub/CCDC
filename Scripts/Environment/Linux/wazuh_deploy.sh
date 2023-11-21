@@ -17,7 +17,7 @@ if [ `whoami` != root ]; then
 fi
 #check if ip address is entered as argument and is valid
 if  [ $# -ne 1 ]; then
-	echo "[!] correct syntax is: ./wazuh_install_script <ip address of this host>"
+	echo "[!] correct syntax is: ./wazuh_deploy.sh <ip address of this host>"
 	exit 1
 else
 	ip a | grep $node_ip > /dev/null 2>&1
