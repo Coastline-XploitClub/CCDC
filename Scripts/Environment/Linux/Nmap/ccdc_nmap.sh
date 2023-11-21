@@ -152,3 +152,5 @@ main() {
     convert_to_html
     print_results
 }
+
+main "$@"
