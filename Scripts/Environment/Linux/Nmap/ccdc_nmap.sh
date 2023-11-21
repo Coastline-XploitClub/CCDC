@@ -25,3 +25,38 @@ create_log_files() {
     touch logs/nmap_errors.log
     touch logs/nmap_output.log
 }
+
+# Nmap scan definitions
+
+# Scan 1: Default scan of subnet given as argument
+initial_scan() {
+    nmap -sV -T4 -oA nmap_logs/initial_scan --min-rate 1000 --stats-every=5s $1
+}
+
+# Extract ports from initial scan
+extract_ports() {
+    grep -oP '\d{1,5}/open' nmap_logs/initial_scan.gnmap | cut -d '/' -f 1 | tr '\n' ',' | sed s/,$//
+}
+
+# Scan 2: Aggressive scan of ports found in initial scan
+aggressive_scan() {
+    nmap -p $1 -A --script vuln -T4 -oA nmap_logs/aggressive_scan --min-rate 1000 --stats-every=5s $2
+}
+
+# Scan 3: Scan for all ports
+all_port_scan() {
+    nmap -p- -T4 -oA nmap_logs/all_ports --min-rate 1000 --stats-every=5s $1
+}
+
+# Scan 4: Aggressive scan of all ports
+aggressive_all_port_scan() {
+    nmap -p- -A --script vuln -T4 -oA nmap_logs/aggressive_all_ports --min-rate 1000 --stats-every=5s $1
+}
+
+# Convert all xml results to html
+convert_to_html() {
+    xsltproc nmap_logs/initial_scan.xml -o nmap_logs/initial_scan.html
+    xsltproc nmap_logs/aggressive_scan.xml -o nmap_logs/aggressive_scan.html
+    xsltproc nmap_logs/all_ports.xml -o nmap_logs/all_ports.html
+    xsltproc nmap_logs/aggressive_all_ports.xml -o nmap_logs/aggressive_all_ports.html
+}
