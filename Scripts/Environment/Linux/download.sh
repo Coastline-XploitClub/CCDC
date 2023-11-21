@@ -30,6 +30,6 @@ mkdir -p images && cd images || exit
 for file in "${files[@]}"; do
     echo -e "${BOLDGREEN}Downloading ${file}...${ENDCOLOR}"
     wget -k "${URL}${file}" &
-    sleep 15;
+    sleep 15
     echo -e "${ITALICRED}Done!${ENDCOLOR}"
 done

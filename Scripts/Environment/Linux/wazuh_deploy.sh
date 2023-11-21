@@ -2,7 +2,7 @@
 
 wazuh_install_script_path="./wazuh-install.sh"
 function check_command {
-	if [ $? -ne 0 ];then
+	if [ $? -ne 0 ]; then
 		echo "error...exiting"
 	else
 		echo "...success..."
@@ -10,29 +10,28 @@ function check_command {
 }
 node_ip=$1
 #check if root
-if [ `whoami` != root ]; then
+if [ "$(whoami)" != "root" ]; then
 	echo "script must be run as root...exiting"
 	exit 1
 
 fi
 #check if ip address is entered as argument and is valid
-if  [ $# -ne 1 ]; then
+if [ $# -ne 1 ]; then
 	echo "[!] correct syntax is: ./wazuh_deploy.sh <ip address of this host>"
 	exit 1
 else
-	ip a | grep $node_ip > /dev/null 2>&1
+	ip a | grep "$node_ip" >/dev/null 2>&1
 	if [ $? -ne 0 ]; then
 		echo "$node_ip not found on local interfaces..exiting"
 		exit 1
-	
-		
+
 	fi
 fi
 #if wazuh-install directory exists prompt user to delete
 if [ -d ./wazuh-install ]; then
 	read -p "wazuh-install directory exists is it ok to delete(y/n)?" choice
-	if [ "$choice" == 'y' ] || [ "$choice" == 'Y' ];then
-		rm -rf  wazuh-install
+	if [ "$choice" == 'y' ] || [ "$choice" == 'Y' ]; then
+		rm -rf wazuh-install
 		echo "...deleted"
 	else
 		echo "ok...exiting..."
@@ -41,7 +40,7 @@ if [ -d ./wazuh-install ]; then
 fi
 #create and change to wazuh-install
 mkdir wazuh-install
-cd wazuh-install
+cd wazuh-install || exit
 
 #indexer installation
 echo "downloading wazuh-install.sh"
@@ -77,14 +76,14 @@ echo "getting username and password"
 username_password=$(tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1)
 check_command
 echo "wazuh username and password:"
-echo $username_password
-pw=$(echo $username_password | awk '{print $4}' | tr -d "'")
+echo "$username_password"
+pw=$(echo "$username_password" | awk '{print $4}' | tr -d "'")
 check_command
 echo "testing cluster..."
-curl -k -u admin:$pw https://$node_ip:9200
+curl -k -u admin:"$pw" https://"$node_ip":9200
 check_command
 echo "checking node..."
-curl -k -u admin:$pw https://$node_ip:9200/_cat/nodes?v
+curl -k -u admin:"$pw" https://"$node_ip":9200/_cat/nodes?v
 check_command
 
 # server cluster installation
@@ -99,4 +98,3 @@ check_command
 
 echo "don't forget to import root.ca.pem to your browser!"
 echo "bye!"
-

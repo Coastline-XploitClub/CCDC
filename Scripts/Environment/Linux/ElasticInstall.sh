@@ -2,8 +2,8 @@
 
 # Check if user has sudo permissions
 if [[ $(id -u) -ne 0 ]]; then
-    echo -e "\e[1;36m This script must be run with sudo privileges. Please use 'sudo' to run this script. \e[0m"
-    exit
+  echo -e "\e[1;36m This script must be run with sudo privileges. Please use 'sudo' to run this script. \e[0m"
+  exit
 fi
 
 echo 'Importing GPG Key...'
