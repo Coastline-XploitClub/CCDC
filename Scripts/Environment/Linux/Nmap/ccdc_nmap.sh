@@ -69,10 +69,14 @@ check_args() {
 
 # Ensure running as root
 is_root() {
+    echo "Entering is_root function..." # Debug
     if [ "$EUID" -ne 0 ]; then
         echo "Please run as root"
+        read -p "Press Enter to continue..." # Debug
         exit 1
     fi
+    echo "Leaving is_root function..." # Debug
+    read -p "Press Enter to continue..." # Debug
 }
 
 # Ensure nmap and xsltproc are installed
@@ -140,17 +144,39 @@ print_results() {
 
 # Main function
 main() {
+    echo "Checking for root privileges..." # Debug
     is_root
+    read -p "Press Enter to continue..." # Debug
+    echo "Checking for arguments..." # Debug
     check_args "$@"
+    read -p "Press Enter to continue..." # Debug
+    echo "Checking for nmap and xsltproc..." # Debug
     is_nmap_installed
+    read -p "Press Enter to continue..." # Debug
+    echo "Creating output directory..." # Debug
     create_output_dir
+    read -p "Press Enter to continue..." # Debug
+    echo "Performing initial scan on subnet $SUBNET..." # Debug
     initial_scan
-    extract_ports
+    read -p "Press Enter to continue..." # Debug
+    echo "Extracting ports from initial scan..." # Debug
+    extract_ports 
+    read -p "Press Enter to continue..." # Debug
+    echo "Performing aggressive scan on ports found in initial scan..." # Debug
     aggressive_scan
+    read -p "Press Enter to continue..." # Debug
+    echo "Performing scan on all ports for subnet $SUBNET..." # Debug
     all_port_scan
+    read -p "Press Enter to continue..." # Debug
+    echo "Performing aggressive scan on all ports for subnet $SUBNET..." # Debug
     aggressive_all_port_scan
+    read -p "Press Enter to continue..." # Debug
+    echo "Converting all xml results to html..." # Debug
     convert_to_html
+    read -p "Press Enter to continue..." # Debug
+    echo "Printing results..." # Debug
     print_results
+    read -p "Press Enter to continue..." # Debug
 }
 
 main "$@"
