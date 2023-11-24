@@ -1,5 +1,5 @@
 # Wazuh Server/Indexer: firewall rules
-- [ ] ports 9200 and 1514 must be open on wazuh server
+- [ ] ports 9200, 1515, 55000, 1514 must be open on wazuh server for single node indexer,server,dashboard. Also open https port for dashboard if we are going to access from another host
 
 ## firewalld 
 ```bash
