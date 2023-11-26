@@ -1,16 +1,15 @@
 # Wazuh Offline Installation
 
-- curl command below will be from this repository
-- relace deb or rpm based on os
+-run this command on a computer with internet access
 ```bash
-curl -sO https://github.com/Coastline-XploitClub/CCDC/blob/main/Scripts/Environment/Linux/Wazuh/wazuh-install.sh
+curl -sO https://packages.wazuh.com/4.6/wazuh-install.sh
 chmod 744 wazuh-install.sh
 ./wazuh-install.sh -dw <deb|rpm>
 ```
-- same with this command config.yml is stored on this repository
+- same with this command 
 ```bash
 
-curl -sO https://github.com/Coastline-XploitClub/CCDC/blob/main/Scripts/Environment/Linux/Wazuh/config.yml
+curl -sO https://packages.wazuh.com/4.6/config.yml
 
 ```
 ## config.yml
