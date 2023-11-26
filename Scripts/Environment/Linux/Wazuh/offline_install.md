@@ -56,3 +56,63 @@ chmod 500 /etc/wazuh-indexer/certs
 chmod 400 /etc/wazuh-indexer/certs/*
 chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
 ```
+- edit /etc/wazuh-indexer/opensearch.yml
+- change network.host to 127.0.0.1
+
+- check indexer node address, leave master note alone for single host deployment
+
+- plugin security node is ok as is for single node deployment
+- then.....drumroll....
+```bash
+systemctl daemon-reload
+systemctl enable wazuh-indexer
+systemctl start wazuh-indexer
+```
+
+## start the cluster ....another drumroll...
+```bash
+/usr/share/wazuh-indexer/bin/indexer-security-init.sh
+```
+## check the indexer via port 9200
+```bash
+curl -XGET https://localhost:9200 -u admin:admin -k
+```
+- output should look like this:
+```bash
+{
+  "name" : "node-1",
+  "cluster_name" : "wazuh-cluster",
+  "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+  "version" : {
+    "number" : "7.10.2",
+    "build_type" : "rpm",
+    "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+    "build_date" : "2023-06-03T06:24:25.112415503Z",
+    "build_snapshot" : false,
+    "lucene_version" : "9.6.0",
+    "minimum_wire_compatibility_version" : "7.10.0",
+    "minimum_index_compatibility_version" : "7.0.0"
+  },
+  "tagline" : "The OpenSearch Project: https://opensearch.org/"
+}
+```
+
+## installing the wazuh manager
+### rpm
+```bash
+rpm --import ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH
+rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-manager*.rpm
+```
+### deb
+```bash
+dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
+```
+### start and enable the wazuh manager
+```bash
+systemctl daemon-reload
+systemctl enable wazuh-manager
+systemctl start wazuh-manager
+```
+
+
+
