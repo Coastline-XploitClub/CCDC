@@ -114,5 +114,69 @@ systemctl enable wazuh-manager
 systemctl start wazuh-manager
 ```
 
+## install filebeat
+### rpm
+```bash
+rpm -ivh ./wazuh-offline/wazuh-packages/filebeat*.rpm
+```
+### deb
+```bash
+dpkg -i ./wazuh-offline/wazuh-packages/filebeat*.deb
+```
+### move the configuration files
+```bash
+cp ./wazuh-offline/wazuh-files/filebeat.yml /etc/filebeat/ &&\
+cp ./wazuh-offline/wazuh-files/wazuh-template.json /etc/filebeat/ &&\
+chmod go+r /etc/filebeat/wazuh-template.json
+```
+### edit /etc/filebeat/wazuh-template.json 
+- change index.number_of_shards to "1"
+```bash
+{
+  ...
+  "settings": {
+    ...
+    "index.number_of_shards": "1",
+    ...
+  },
+  ...
+}
+```
+
+### check /etc/filebeat/filebeat.yml 
+- make sure your localhost is set for hosts
+
+- create filebeat keystore to store credentials
+```bash
+filebeat keystore create
+```
+- add the default passwords to the keystore
+```bash
+echo admin | filebeat keystore add username --stdin --force
+
+echo admin | filebeat keystore add password --stdin --force
+```
+
+- install the wazuh module for filebeat
+```bash
+tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.2.tar.gz -C /usr/share/filebeat/module
+```
+- enter a NODE_NAME="wazuh-1" to fill in the following commands
+```bash
+mkdir /etc/filebeat/certs
+
+mv -n wazuh-certificates/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
+
+mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
+
+cp wazuh-certificates/root-ca.pem /etc/filebeat/certs/
+
+chmod 500 /etc/filebeat/certs
+
+chmod 400 /etc/filebeat/certs/*
+
+chown -R root:root /etc/filebeat/certs
+```
+
 
 
