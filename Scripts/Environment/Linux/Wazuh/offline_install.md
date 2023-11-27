@@ -230,5 +230,8 @@ cp wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/
 chmod 500 /etc/wazuh-dashboard/certs
 chmod 400 /etc/wazuh-dashboard/certs/*
 chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
-```bash
+
+```
+
+### edit /etc/wazuh-dashboard/opensearch_dashboards.yml
 
