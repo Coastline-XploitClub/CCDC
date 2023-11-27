@@ -1,5 +1,8 @@
 # Wazuh Offline Installation
-i stored these files on my kali vm under /home/kali/Documents/wazuh-offline/deb and /rpm
+[official documentation](https://documentation.wazuh.com/current/deployment-options/offline-installation.html)
+
+
+I stored these files on my kali vm under /home/kali/Documents/wazuh-offline/deb and /rpm
 ## on host with internet access
 ```bash
 curl -sO https://packages.wazuh.com/4.6/wazuh-install.sh
@@ -204,4 +207,28 @@ elasticsearch: https://127.0.0.1:9200...
   talk to server... OK
   version: 7.10.2
 
+- check if number of "shards" are correct
+```bash
+curl -k -u admin:admin "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards"
+```
+## Install the dashboard
+### rpm
+```bash
+rpm --import ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH
+rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-dashboard*.rpm
+```
+### deb
+```bash
+dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
+```
+NODE_NAME='dashboard'
+```bash
+mkdir /etc/wazuh-dashboard/certs
+mv -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-dashboard/certs/dashboard.pem
+mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/dashboard-key.pem
+cp wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/
+chmod 500 /etc/wazuh-dashboard/certs
+chmod 400 /etc/wazuh-dashboard/certs/*
+chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+```bash
 
