@@ -241,8 +241,14 @@ set opensearch.hosts to https://localhost:9200
 set opensearch.ssl.verificationMode certificate
 ```
 server.host: 0.0.0.0
-   server.port: 443
-   opensearch.hosts: https://localhost:9200
-   opensearch.ssl.verificationMode: certificate
+server.port: 443
+opensearch.hosts: https://localhost:9200
+opensearch.ssl.verificationMode: certificate
+```
+- start and enable the services
+```bash
+systemctl daemon-reload
+systemctl enable wazuh-dashboard
+systemctl start wazuh-dashboard
 ```
 
