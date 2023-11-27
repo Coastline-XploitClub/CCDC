@@ -235,3 +235,14 @@ chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
 
 ### edit /etc/wazuh-dashboard/opensearch_dashboards.yml
 
+set server host to 0.0.0.0
+set server.port to a good port default 443
+set opensearch.hosts to https://localhost:9200
+set opensearch.ssl.verificationMode certificate
+```
+server.host: 0.0.0.0
+   server.port: 443
+   opensearch.hosts: https://localhost:9200
+   opensearch.ssl.verificationMode: certificate
+```
+
