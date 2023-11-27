@@ -178,5 +178,30 @@ chmod 400 /etc/filebeat/certs/*
 chown -R root:root /etc/filebeat/certs
 ```
 
+- enable and start
+```bash
+systemctl daemon-reload
+systemctl enable filebeat
+systemctl start filebeat
+```
+### test file beat
+```bash
+filebeat test output
+```
+
+elasticsearch: https://127.0.0.1:9200...
+  parse url... OK
+  connection...
+    parse host... OK
+    dns lookup... OK
+    addresses: 127.0.0.1
+    dial up... OK
+  TLS...
+    security: server's certificate chain verification is enabled
+    handshake... OK
+    TLS version: TLSv1.3
+    dial up... OK
+  talk to server... OK
+  version: 7.10.2
 
 
