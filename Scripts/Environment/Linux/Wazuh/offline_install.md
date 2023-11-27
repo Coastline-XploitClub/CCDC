@@ -251,4 +251,9 @@ systemctl daemon-reload
 systemctl enable wazuh-dashboard
 systemctl start wazuh-dashboard
 ```
+# deploy agents
+[wazuh packages](https://documentation.wazuh.com/current/installation-guide/packages-list.html)
+
+use python server, scp or other method to transfer to hosts
+
 
