@@ -21,7 +21,7 @@ foreach ($admin in $localAdmins) {
 
 # Get domain admins
 $domainAdmins = Get-ADGroupMember -Identity "Domain Admins" -Recursive | Get-ADUser
-Write-Output "`nDomain Administrators:"
+Write-Output "Domain Administrators:"
 "" | Out-File $outputFile -Append
 "Domain Administrators:" | Out-File $outputFile -Append
 "" | Out-File $outputFile -Append
