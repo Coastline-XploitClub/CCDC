@@ -1,5 +1,5 @@
 # Script to get all users and groups from a domain and local machine with admin rights
-Import-Module AcitveDirectory
+Import-Module ActiveDirectory
 
 # Prepare output file
 $outputFile = "admin.txt"
