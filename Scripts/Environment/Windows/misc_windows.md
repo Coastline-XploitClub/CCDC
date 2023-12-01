@@ -7,3 +7,11 @@ Get-SmbServerConfiguration | Select EnableSMB1Protocol
 ```powershell
 Set-SmbServerConfiguration -EnableSMB1Protocol $false
 ```
+### check for service principal names
+```powershell
+setspn -L <hostname>
+```
+### Deregister spn
+```powershell
+setspn -d <serviceClass/Host:Port> <AccountName>
+```
