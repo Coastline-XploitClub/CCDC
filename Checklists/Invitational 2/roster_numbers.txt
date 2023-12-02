@@ -1,6 +1,6 @@
-Joseph 1
+Joseph 3
 Naquib 2
-Seon 3
+Seon 1
 Jennifer 4
 Aaron 5
 Cameron 6
