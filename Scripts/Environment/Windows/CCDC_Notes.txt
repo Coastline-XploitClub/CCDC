@@ -1,0 +1,111 @@
+Order of things in the first minutes:
+
+User Disable and Changing Password:
+Net user [username] /active:no
+Wmic useraccount where name=’john’ set disabled=true
+Dsmod user -u [username] -disabled yes
+Net user [username] [password]
+
+Mass Rolling Passwords or Mass Disable
+dsquery group -name [group name] | dsget group -members | findstr /V "[ignoreduser] [otherignoreduser]" | dsmod user -pwd [password]
+-disabled yes (to disable, no to enable)
+
+Creating and Removing Shares:
+Removing Shares:
+Net share [sharename] /delete
+Adding Share:
+Right click on folder, properties, share, advance sharing, permission, add, search for object names, set permissions. 
+
+Killing a Process:
+Taskkill /im [name].exe
+Taskkill /pid [pid]
+List Processes:
+Tasklist
+Tasklist /m (show each process and dll loaded)
+Tasklist /m [dll] (list all processes with that dll)
+Tasklist /svc (list all processes and services associated with each)
+Wmic process list full
+
+List Detailed User and Computer Information
+Gpresult /r
+Gpresult /v
+
+Check if can reach computer on domain + its info
+Nbtstat -a [cn or ip] 
+
+Add or Remove Computer from Domain:
+Net computer \\[cn] /add
+Net computer \\[cn] /del
+
+WMIC:
+Process, service, share, startup, useraccount, qfe
+wmic computersystem get roles
+wmic netlogin list brief
+wmic ntdomain > test.txt
+
+View current sessions:
+quser
+quser /server:ip
+
+System File Checker:
+sfc.exe /scannow
+Scans for any missing or corrupted system files
+
+Execute CMD from Powershell:
+cmd.exe /c start
+
+Searching for File in Directory:
+Dir “*.ova” /s /b
+
+Display Last Reboot Time and Machine Statistics
+Net statistics workstation
+
+Show Current local and remote Logons
+Query session 
+Query user (shows user sessions)
+Net session (shows remote logons)
+
+Kill Logon Sessions
+Logoff [sessionid | sessionname] 
+
+List DC, workstations
+Netdom query [workstation | DC | server | PDC]
+Dsquery computer
+Net group “___” [can input domain controllers, domain computers”
+
+Firewall Management (rest in BTFM)
+Netsh advfirewall set [currentprofile | allprofile | publicprofile | privateprofile | domainprofile] state on
+Netsh advfirewall set currenprofile firewallpolicy blockinboundalways, allowoutbound
+
+Group policy updates (GPO)
+Gpupdate [/force | /sync]
+
+Ipconfig DNS renewal
+Ipconfig /flushdns
+Ipconfig /release
+Ipconfig /renew
+
+Powershell Install IIS
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+http://stackoverflow.com/questions/5615296/cannot-read-configuration-file-due-to-insufficient-permissions
+http://stackoverflow.com/questions/20048486/http-error-500-19-and-error-code-0x80070021
+
+Powershell Install Hyper-V
+Install-WindowsFeature -Name Hyper-V -IncludeManagementTools -Restart
+
+Install SQL Server Management Studio
+https://www.sqlshack.com/sql-server-management-studio-step-step-installation-guide 
+
+Install Sysmon:
+Download: https://technet.microsoft.com/en-us/sysinternals/sysmon
+
+install: sysmon -accepteula -i
+github.com/SwiftOnSecurity/sysmon-config
+sysmon.exe -c sysmonconfig-export.xml
+update config or dump config if no args: sysmon -c
+
+Sysmon Forwarding
+	- admin. cmd: 
+		- on collector: wecutil qc
+		- on forwarder: wimrm quickconfig
+	- add collector to “Event Log Readers” group
