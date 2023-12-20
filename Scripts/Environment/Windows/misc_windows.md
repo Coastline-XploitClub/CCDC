@@ -15,3 +15,9 @@ setspn -L <hostname>
 ```powershell
 setspn -d <serviceClass/Host:Port> <AccountName>
 ```
+### Backup DNS
+
+```powershell
+Export-DnsServerZone -Name <zonename> -filename <zonename.dns.bak>
+```
+- will be stored in C:\Windows\System32\dns
