@@ -1,0 +1,61 @@
+;
+;  Database file (null) for Default zone scope in zone stream.stream.
+;      Zone version:  323
+;
+
+@                       IN  SOA colorado.stream.stream. hostmaster.stream.stream. (
+                        		323          ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		3600       ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	colorado.stream.stream.
+@                       NS	ohio.stream.stream.
+@                       NS	columbia.stream.stream.
+
+;
+;  Zone records
+;
+
+@                       600	A	192.168.220.11
+
+;
+;  Delegated sub-zone:  _msdcs.stream.stream.
+;
+_msdcs                  NS	colorado.stream.stream.
+;  End delegation
+
+_gc._tcp.Default-First-Site-Name._sites 600	SRV	0 100 3268	colorado.stream.stream.
+_kerberos._tcp.Default-First-Site-Name._sites 600	SRV	0 100 88	colorado.stream.stream.
+_ldap._tcp.Default-First-Site-Name._sites 600	SRV	0 100 389	colorado.stream.stream.
+_gc._tcp                600	SRV	0 100 3268	colorado.stream.stream.
+_kerberos._tcp          600	SRV	0 100 88	colorado.stream.stream.
+_kpasswd._tcp           600	SRV	0 100 464	colorado.stream.stream.
+_ldap._tcp              600	SRV	0 100 389	colorado.stream.stream.
+_kerberos._udp          600	SRV	0 100 88	colorado.stream.stream.
+_kpasswd._udp           600	SRV	0 100 464	colorado.stream.stream.
+amazon                  A	192.168.220.254
+american                1200	A	192.168.220.78
+colorado                A	192.168.220.11
+columbia                A	192.168.220.253
+DomainDnsZones          600	A	192.168.220.11
+_ldap._tcp.Default-First-Site-Name._sites.DomainDnsZones 600	SRV	0 100 389	colorado.stream.stream.
+_ldap._tcp.DomainDnsZones 600	SRV	0 100 389	colorado.stream.stream.
+etherpad                A	192.168.220.113
+ForestDnsZones          600	A	192.168.220.11
+_ldap._tcp.Default-First-Site-Name._sites.ForestDnsZones 600	SRV	0 100 389	colorado.stream.stream.
+_ldap._tcp.ForestDnsZones 600	SRV	0 100 389	colorado.stream.stream.
+ifingr                  A	192.168.220.133
+lfingr                  A	192.168.220.133
+mc                      A	192.168.220.113
+mississippi             A	192.168.220.1
+nile                    A	192.168.220.80
+ohio                    A	192.168.220.113
+pattagansett            A	192.168.220.44
+virgin                  1200	A	192.168.220.222
+wazuh                   A	192.168.220.13
