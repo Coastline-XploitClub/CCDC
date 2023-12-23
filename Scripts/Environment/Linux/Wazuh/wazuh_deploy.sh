@@ -45,10 +45,10 @@ cd wazuh-install || exit
 
 #indexer installation
 echo "downloading wazuh-install.sh"
-curl -sO https://packages.wazuh.com/4.6/wazuh-install.sh
+curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
 check_command
 echo "downloading config.yml"
-curl -sO https://packages.wazuh.com/4.6/config.yml
+curl -sO https://packages.wazuh.com/4.7/config.yml
 check_command
 echo "setting indexer node ip in config.yml"
 sed -i "s/<indexer-node-ip>/${node_ip}/g" config.yml
