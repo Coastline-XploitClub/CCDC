@@ -5,14 +5,14 @@
 I stored these files on my kali vm under /home/kali/Documents/wazuh-offline/deb and /rpm
 ## on host with internet access
 ```bash
-curl -sO https://packages.wazuh.com/4.6/wazuh-install.sh
+curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
 chmod 744 wazuh-install.sh
 ./wazuh-install.sh -dw <deb|rpm>
 ```
 
 ```bash
 
-curl -sO https://packages.wazuh.com/4.6/config.yml
+curl -sO https://packages.wazuh.com/4.7/config.yml
 
 ```
 ## config.yml
