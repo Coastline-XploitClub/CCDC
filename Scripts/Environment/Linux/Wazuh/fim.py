@@ -16,7 +16,7 @@ ip_address = (args.ip)
 dir_loc = (args.directory)
 
 
-#password = '#!C0@stCCDCteam!'
+
 username = input(termcolor.colored('[?]', "green")+ ' Enter username: ')
 print(termcolor.colored("[?] ", "green"), end="")
 password = maskpass.askpass(prompt="Password: ", mask="#")
