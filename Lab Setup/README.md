@@ -31,16 +31,25 @@ This guide will walk you through setting up a CCDC training environment on a typ
 
 ## Part 1: Vsphere Installation
 
-![Alt text](esxi-loading-1.png)
-![Alt text](esxi-loading-2.png)
-![Alt text](esxi-loading-final.png)
-![Alt text](esxi-eula.png)
-![Alt text](esxi-disk-selection.png)
-![Alt text](esxi-set-password.png)
-![Alt text](esxi-hardware-override.png)
-![Alt text](esxi-confirm-install.png)
-![Alt text](esxi-post-install-reboot.png)
-![Alt text](esxi-first-boot.png)
+![Alt text](./esxi-loading-1.png)
+![Alt text](./esxi-loading-2.png)
+![Alt text](./esxi-loading-final.png)
+![Alt text](./esxi-eula.png)
+![Alt text](./esxi-disk-selection.png)
+![Alt text](./esxi-set-password.png)
+![Alt text](./esxi-hardware-override.png)
+![Alt text](./esxi-confirm-install.png)
+![Alt text](./esxi-post-install-reboot.png)
+![Alt text](./esxi-first-boot.png)
+![Alt text](./esxi-system-menu-auth.png)
+![Alt text](./esxi-config-mgmt-network-1.png)
+![Alt text](./esxi-config-mgmt-network-2.png)
+![Alt text](./esxi-config-mgmt-network-3.png)
+![Alt text](./esxi-config-mgmt-network-4.png)
+![Alt text](./esxi-config-mgmt-network-5.png)
+![Alt text](./esxi-config-mgmt-network-ipv6.png)
+![Alt text](./esxi-config-mgmt-network-reboot.png)
+![Alt text](./esxi-config-mgmt-network-confirm.png)
 
 ### 1.1: Downloading Vsphere
 
