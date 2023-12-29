@@ -140,6 +140,16 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 
 ### 2.2: Installing Proxmox
 
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-boot.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-eula.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-zfs-1.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-language.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-password.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-network.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-confirm-install.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-install-reboot.png)
+![Alt text](/Lab%20Setup/png/proxmox/proxmox-first-boot.png)
+
 ### 2.3: Configuring Proxmox Cluster
 
 ## Part 3: Lab Setup Vsphere
