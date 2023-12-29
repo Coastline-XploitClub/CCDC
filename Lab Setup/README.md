@@ -126,7 +126,7 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi-config-mgmt-network-confirm.png)
 
-- For the purposes of this guide, we will be setting up a 3 node Vsphere cluster. Repeat the installation process for each additional node in the cluster. The following screenshots show the network configuration for each node in the cluster. Note that the IP address and hostname are different for each node.
+- For the purposes of this guide, we will be setting up a 4 node Vsphere cluster. Repeat the installation process for each additional node in the cluster. The following screenshots show the network configuration for each node in the cluster. Note that the IP address and hostname are different for each node.
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi-node-2.png)
 ![Alt text](/Lab%20Setup/png/esxi/esxi-node-3.png)
