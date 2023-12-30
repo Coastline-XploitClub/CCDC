@@ -2,7 +2,7 @@
 
 ## Machine IP
 
-Document both internal and external IPs. (Windows: `ipconfig /all`, Linux: `ifconfig` OR` ip a`)
+Document both internal and external IPs. (Windows: `ipconfig /all`, Linux: `ifconfig` OR`ip a`)
 
 ---
 
@@ -56,7 +56,7 @@ Identify where sensitive data is stored.
 
 ## Backup Status
 
-Check if backups exist and their last update. Create backups of important files, logs, etc.
+Check if backups exist and their last update. Create backups of important files, logs, etc. (Windows: `Compress-Archive -Path "C:\path\to\directory" -DestinationPath "C:\path\to\backup.zip"`, Linux `tar -czvf backup.tar.gz /path/to/directory`)
 
 ---
 
