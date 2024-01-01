@@ -109,7 +109,7 @@ add to the server
 ### using api
 
 ```bash
-TOKEN=$(curl -u : -k -X GET "https://WAZUH_MANAGEMENT_SERVER_IP:55000/security/user/authenticate?raw=true")
+TOKEN=$(curl -u <username>:<password> -k -X GET "https://WAZUH_MANAGEMENT_SERVER_IP:55000/security/user/authenticate?raw=true")
 curl -k -X GET "https://10.10.17.180:55000/" -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -138,3 +138,5 @@ use gui to add to /etc/rules...local rules require a decoder, for this example y
     </rule>
 </group>
 ```
+## detecting active directory attacks
+“Replicating Directory Changes” and “Replicating Directory Changes All” 
