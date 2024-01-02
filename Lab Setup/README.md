@@ -138,6 +138,24 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 
 ### 2.1: Downloading Proxmox
 
+- You can download the Proxmox installer from the following link: <https://www.proxmox.com/en/downloads>. The Proxmox installer is a bootable ISO that can be burned to a USB drive using a tool like Rufus or dd in linux.
+
+  - *Make sure to download the Proxmox VE ISO and not the Proxmox Backup Server ISO.*
+
+- Rufus can be downloaded from the following link: <https://rufus.ie/>. Once installed, open Rufus and select the USB drive you would like to burn the Proxmox installer to. Select the Proxmox installer ISO and click start. Rufus will burn the Proxmox installer to the USB drive and make it bootable.  
+
+- If you are using Linux, you can burn the Proxmox installer to a USB drive using the dd command. First, plug in the USB drive and run the following command to find the device name of the USB drive:
+
+    ```bash
+    lsblk
+    ```
+
+- Next, run the following command to burn the Proxmox installer to the USB drive, substituting the device name of the USB drive for `/dev/sdX` and the path to the Proxmox installer ISO for `/path/to/proxmox/installer.iso`:
+
+  ```bash
+  sudo dd if=/path/to/proxmox/installer.iso of=/dev/sdX bs=4M status=progress
+  ```
+
 ### 2.2: Installing Proxmox
 
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-boot.png)
