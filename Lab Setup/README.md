@@ -134,6 +134,11 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 
 ### 1.3: Configuring Vcenter
 
+Vcenter is a management server for Vsphere that allows you to manage multiple Vsphere hosts from a single interface. Vcenter is required to create a Vsphere cluster and is used to manage the CCDC training environment. Vcenter is not free, but a 60 day trial license can be obtained from VMware's website. The trial license will be sufficient for the duration of the CCDC training season. Again, Proxmox is a great alternative that is free and open source.
+
+- Vcenter will be installed as a virtual machine on one of the Vsphere hosts. To install Vcenter, you will need to download the Vcenter installer from the following link: <https://my.vmware.com/en/web/vmware/evalcenter?p=free-esxi8>. The Vcenter installer is a bootable ISO that can be burned to a USB drive using a tool like Rufus or dd in linux. The image below shows the correct ISO to download.
+![Alt text](/Lab%20Setup/png/esxi/vcenter-iso.png)
+
 ## Part 2: Proxmox Installation
 
 ### 2.1: Downloading Proxmox
