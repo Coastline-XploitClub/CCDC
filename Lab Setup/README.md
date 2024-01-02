@@ -141,14 +141,32 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 ### 2.2: Installing Proxmox
 
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-boot.png)
+Start by booting from the Proxmox installer USB drive. You will be presented with the following screen. Select `Install Proxmox VE (Graphical)` and press `Enter` to continue.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-eula.png)
+Accept the EULA by selecting `I agree to the terms of the end user license agreement` and press `Enter` to continue.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-zfs-1.png)
+There are several options for configuring the storage for Proxmox. For the purposes of this guide, we will be using ZFS. Select `ZFS (RAID1)` and press `Enter` to continue. ZFS is a file system that provides data integrity, compression, and other features. ZFS is a great choice for a Proxmox installation because it is easy to configure and provides data integrity features that are not available with other file systems.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-language.png)
+Select your language and time zone and press `Enter` to continue.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-password.png)
+Configure a password for the root user and press and an email address for notifications. Press `Enter` to continue.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-network.png)
+Select the network interface to be used for the management network and configure a static IP address, subnet mask, and default gateway. The subnet mask should be consistent with your local network configuration, and the default gateway is typically the IP address of your router or main network access point. Ensure that the static IP address you choose is not already in use and falls outside the DHCP scope of your router to prevent IP address conflicts. Press `Enter` to continue.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-confirm-install.png)
+Review the installation summary and press `Enter` to continue.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-install-reboot.png)
+Once the installation is complete, you will be prompted to reboot. Press `Enter` to reboot.
+\
 ![Alt text](/Lab%20Setup/png/proxmox/proxmox-first-boot.png)
+If the installation was successful, you will be presented with the following screen detailing the host's IP address and other information.
+\
 
 ### 2.3: Configuring Proxmox Cluster
 
