@@ -137,7 +137,28 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 Vcenter is a management server for Vsphere that allows you to manage multiple Vsphere hosts from a single interface. Vcenter is required to create a Vsphere cluster and is used to manage the CCDC training environment. Vcenter is not free, but a 60 day trial license can be obtained from VMware's website. The trial license will be sufficient for the duration of the CCDC training season. Again, Proxmox is a great alternative that is free and open source.
 
 - Vcenter will be installed as a virtual machine on one of the Vsphere hosts. To install Vcenter, you will need to download the Vcenter installer from the following link: <https://my.vmware.com/en/web/vmware/evalcenter?p=free-esxi8>. The Vcenter installer is a bootable ISO that can be burned to a USB drive using a tool like Rufus or dd in linux. The image below shows the correct ISO to download.
+\
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-iso.png)
+
+- We will be installing Vcenter on the first Vsphere host we installed. We need to log in to the `esxi1` host to configure the storage for the Vcenter VM. To log in to the `esxi1` host, open a web browser and navigate to the IP address specified during installation. You will be presented with a warning about the site's security certificate. This is expected because we are using a self-signed certificate. Click `Advanced` and then `Proceed to esxi1 (unsafe)` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-login-1.png)
+
+- Next, you will be presented with the login screen. Enter the root username and password you set during installation and click `Login` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-login-2.png)
+
+- Once you have logged in, you will be presented with the following screen. Click `Virtual Machines` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-login-3.png)
+
+- To install Vcenter, mount the Vcenter installer ISO on your host and navigate to the mounted ISO. Navigate to the installation binary for your operating system. In this case, we will be installing Vcenter on a Windows host, so we will navigate to the `vcsa-ui-installer\win32` directory. Run the `installer.exe` file to start the Vcenter installer.
+\
+![Alt text](/Lab%20Setup/png/esxi/Vcenter-Installer.png)
+
+- The Vcenter installer will load and you will be presented with the following screen. Click `Install` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-1.png)
 
 ## Part 2: Proxmox Installation
 
