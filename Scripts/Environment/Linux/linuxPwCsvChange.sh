@@ -40,7 +40,7 @@ do
             random_pass=$(echo "$random_pass" | fold -w1 | shuf | tr -d '\n')
 
             # Set the password for the user
-            echo "$username:$random_pass"
+            echo "$username:$random_pass" | chpasswd
 
             # Output the user and password to the CSV file
             echo "$username:$random_pass" >> "$output_file"
