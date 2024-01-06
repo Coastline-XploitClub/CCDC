@@ -172,9 +172,44 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 \
 ![Alt text](/Lab%20Setup/png/esxi/Vcenter-Installer.png)
 
-- The Vcenter installer will load and you will be presented with the following screen. Click `Install` to continue.
+- The Vcenter installer will load and you will be presented with the following screen. Click `Next` to continue.
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-1.png)
+
+- Next, you will be prompted to accept the EULA. Feel free to read the EULA before accepting it. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-2.png)
+- Next, you will be prompted to enter the IP address or hostname of the Vsphere host you would like to install Vcenter on, a username, and a password. Enter the IP address of the Vsphere host you would like to install Vcenter on, the username `root`, and the password you set during installation. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-3.png)
+
+- Next, you will be prompted to accept the host's SSL certificate. Click `Yes` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-4.png)
+
+- Next, you will be prompted to enter the name of the Vcenter VM, and the root password for the Vcenter VM, Enter a name for the Vcenter VM and a password that meets the minimum requirements. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-5.png)
+
+- Next, you will be prompted to select the deployment size. Select `Tiny` and click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-6.png)
+
+- Next, you will be prompted to select the datastore to install Vcenter on. Select the datastore you created earlier and check the box to enable thin disk mode. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-7.png)
+
+- Next, you will be prompted to configure the networking for the Vcenter installation. Select the network interface to be used for the management network and configure a static IP address, subnet mask, and default gateway. The subnet mask should be consistent with your local network configuration, and the default gateway is typically the IP address of your router or main network access point. Ensure that the static IP address you choose is not already in use and falls outside the DHCP scope of your router to prevent IP address conflicts. In this example we will use `172.20.10.15` for the Vcenter IP address. Use the same DNS servers that we used for the Vsphere hosts. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-8.png)
+
+- Confirm the installation summary and click `Finish` to begin the installation.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-9.png)
+
+- The installation will take some time to complete. Once the installation is complete, you will be presented with the following screen. Click `Continue to vCenter Server Appliance` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-10.png)
 
 ## Part 2: Proxmox Installation
 
