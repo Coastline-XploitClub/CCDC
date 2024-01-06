@@ -207,7 +207,7 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-9.png)
 
-- The installation will take some time to complete. Once the installation is complete, you will be presented with the following screen. Click `Continue to vCenter Server Appliance` to continue.
+- The installation will take some time to complete. Once the installation is complete, you will be presented with the following screen. Click `Continue` to finish the installation.
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-10.png)
 
