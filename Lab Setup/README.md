@@ -152,7 +152,21 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi1-login-3.png)
 
--
+- Next, select `Create new VMFS Datastore` and click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-storage-1.png)
+
+- Select the disk you would like to use for the Vcenter VM and give it an appropriate name. We'll use the second disk on our Vsphere host and use `vm` in this example. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-storage-2.png)
+
+- Select `VMFS-6` as the file system type and click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-storage-3.png)
+
+- Review the summary and click `Finish` to create the datastore.
+\
+![Alt text](/Lab%20Setup/png/esxi/esxi1-storage-4.png)
 
 - To install Vcenter, mount the Vcenter installer ISO on your host and navigate to the mounted ISO. Navigate to the installation binary for your operating system. In this case, we will be installing Vcenter on a Windows host, so we will navigate to the `vcsa-ui-installer\win32` directory. Run the `installer.exe` file to start the Vcenter installer.
 \
