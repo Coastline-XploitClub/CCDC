@@ -140,17 +140,19 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-iso.png)
 
-- We will be installing Vcenter on the first Vsphere host we installed. We need to log in to the `esxi1` host to configure the storage for the Vcenter VM. To log in to the `esxi1` host, open a web browser and navigate to the IP address specified during installation. You will be presented with a warning about the site's security certificate. This is expected because we are using a self-signed certificate. Click `Advanced` and then `Proceed to esxi1 (unsafe)` to continue.
+- We will be installing Vcenter on the first Vsphere host we installed. We need to log in to the `esxi1` host to configure the storage for the Vcenter VM. To log in to the `esxi1` host, open a web browser and navigate to the IP address specified during installation. You will be presented with a warning about the site's security certificate. This is expected because we are using a self-signed certificate. Click `Advanced` and then `Accept the risk and Continue` to continue.
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi1-login-1.png)
 
-- Next, you will be presented with the login screen. Enter the root username and password you set during installation and click `Login` to continue.
+- Next, you will be presented with the login screen. Enter the username `root` and password you set during installation and click `Login` to continue.
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi1-login-2.png)
 
-- Once you have logged in, you will be presented with the following screen. Click `Virtual Machines` to continue.
+- Once you have logged in, you will be presented with the following screen. Click `Storage` on the left menu, then `New Datastore` to configure the virtual machine storage datastore.
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi1-login-3.png)
+
+-
 
 - To install Vcenter, mount the Vcenter installer ISO on your host and navigate to the mounted ISO. Navigate to the installation binary for your operating system. In this case, we will be installing Vcenter on a Windows host, so we will navigate to the `vcsa-ui-installer\win32` directory. Run the `installer.exe` file to start the Vcenter installer.
 \
