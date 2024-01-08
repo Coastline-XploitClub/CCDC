@@ -6,10 +6,14 @@ This guide will walk you through setting up a CCDC training environment on a typ
 
 - [CCDC Training Environment Setup Guide](#ccdc-training-environment-setup-guide)
   - [Table of Contents](#table-of-contents)
-  - [Part 1: Vsphere Installation](#part-1-vsphere-installation)
-    - [1.1: Downloading Vsphere](#11-downloading-vsphere)
-    - [1.2: Installing Vsphere](#12-installing-vsphere)
-    - [1.3: Configuring Vcenter](#13-configuring-vcenter)
+  - [Part 1: VMware Installation](#part-1-vmware-installation)
+    - [Setting up Installation](#setting-up-installation)
+      - [Downloading Vsphere](#downloading-vsphere)
+      - [Burning Vsphere to a USB drive](#burning-vsphere-to-a-usb-drive)
+    - [Installing Vsphere](#installing-vsphere)
+    - [Configuring Vcenter](#configuring-vcenter)
+      - [Installing Vcenter Server VM](#installing-vcenter-server-vm)
+      - [Adding Vsphere Hosts to Vcenter](#adding-vsphere-hosts-to-vcenter)
   - [Part 2: Proxmox Installation](#part-2-proxmox-installation)
     - [2.1: Downloading Proxmox](#21-downloading-proxmox)
     - [2.2: Installing Proxmox](#22-installing-proxmox)
@@ -30,14 +34,15 @@ This guide will walk you through setting up a CCDC training environment on a typ
     - [5.3: Configuring Wireguard Client](#53-configuring-wireguard-client)
     - [5.4: Connecting to Wireguard VPN](#54-connecting-to-wireguard-vpn)
 
-## Part 1: Vsphere Installation
-
+## Part 1: VMware Installation
 Vsphere is an enterprise type-1 hypervisor from VMware that is used in many enterprise environments. Vsphere is a great choice to host a CCDC training environment because it is used to host the CCDC competition environment, and teams frequently have access to Vsphere during the competition. Familiarity with Vsphere will help teams during the competition and serve as a great learning experience. One downside to Vsphere is the cost for a license needed to host the full CCDC training environment. Obtaining a license for Vsphere is outside the scope of this guide, but a 60 day trial license can be obtained from VMware's website. The trial license will be sufficient for the duration of the CCDC training season. If you are unable to obtain a license, Proxmox is a great alternative that is free and open source.
 
-### 1.1: Downloading Vsphere
+### Setting up Installation
 
+#### Downloading Vsphere
 - In order to download Vsphere, you will need to create an account on VMware's website. Once you have created an account, you can download the Vsphere installer from the following link: <https://my.vmware.com/en/web/vmware/evalcenter?p=free-esxi8>. The Vsphere installer is a bootable ISO that can be burned to a USB drive using a tool like Rufus or dd in linux.
 
+#### Burning Vsphere to a USB drive
 - Rufus can be downloaded from the following link: <https://rufus.ie/>. Once installed, open Rufus and select the USB drive you would like to burn the Vsphere installer to. Select the Vsphere installer ISO and click start. Rufus will burn the Vsphere installer to the USB drive and make it bootable.  
 
 - If you are using Linux, you can burn the Vsphere installer to a USB drive using the dd command. First, plug in the USB drive and run the following command to find the device name of the USB drive:
@@ -52,7 +57,7 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
     sudo dd if=/path/to/vsphere/installer.iso of=/dev/sdX bs=4M status=progress
     ```
 
-### 1.2: Installing Vsphere
+### Installing Vsphere
 
 - To install Vsphere, plug the USB drive containing the Vsphere installer into the computer you would like to install Vsphere on and boot from the USB drive. The Vsphere installer will load and you will be presented with the following screens:
 \
@@ -133,7 +138,9 @@ Vsphere is an enterprise type-1 hypervisor from VMware that is used in many ente
 ![Alt text](/CCDC/Lab%20Setup/png/esxi/esxi-node-3.png)
 ![Alt text](/CCDC/Lab%20Setup/png/esxi/esxi-node-4.png)
 
-### 1.3: Configuring Vcenter
+### Configuring Vcenter
+
+#### Installing Vcenter Server VM
 
 Vcenter is a management server for Vsphere that allows you to manage multiple Vsphere hosts from a single interface. Vcenter is required to create a Vsphere cluster and is used to manage the CCDC training environment. Vcenter is not free, but a 60 day trial license can be obtained from VMware's website. The trial license will be sufficient for the duration of the CCDC training season. Again, Proxmox is a great alternative that is free and open source.
 
@@ -211,6 +218,37 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 - The installation will take some time to complete. Once the installation is complete, you will be presented with the following screen. Click `Continue` to finish the installation.
 \
 ![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-installer-10.png)
+
+- Select `Next` to move to the `vCenter Server Configuration` screen and select `Synchronize time with the NTP servers` from the `Time Synchronization Mode` dropdown menu. Enter the IP address of public NTP servers found on a site like <https://www.ntppool.org/en/> and click `Next` to continue. In this example, we will use `0.us.pool.ntp.org` and `1.us.pool.ntp.org`. Finally, enable SSH access and click `Next` to continue.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-installer-11.png)
+
+- Next, we will create a new SSO domain for Vcenter. Enter a name for the SSO domain and a password that meets the minimum requirements. In this example, we will use `ccdc.lab` for the SSO domain name and the same password we used for the Vsphere root password. Click `Next` to continue.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-installer-12.png)
+
+- Accept the default checkbox to join the VMware customer experience improvement program. This will give VMware anonymous usage data to help improve their products, but will also give us access to features such as vSphere Health, vSan Online Health, and vCenter Server Update Planner. Click `Next` to continue.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-installer-13.png)
+
+- Finally, confirm the installation summary and click `Finish` to begin the installation.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-installer-14.png)
+
+- While the installation is running, you can navigate back to the Vsphere host to see the Vcenter virtual machine that was created.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/esxi1-vcenter-vm.png)
+
+- Once the installation is complete, you will be presented with the following screen. Click `Launch vSphere Client` to open the Vsphere client.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-installer-15.png)
+
+#### Adding Vsphere Hosts to Vcenter
+With Vcenter installed, we can now add the Vsphere hosts to Vcenter to create a Vsphere cluster. We will be adding all of the Vsphere hosts to Vcenter. 
+
+- To add a Vsphere host to Vcenter, open a web browser and navigate to the IP address of the Vcenter server. You will be presented with a warning about the site's security certificate. This is expected because we are using a self-signed certificate. Click `Advanced` and then `Accept the risk and Continue` to continue.
+\
+![Alt text](/CCDC/Lab%20Setup/png/esxi/vcenter-login-1.png)
 
 ## Part 2: Proxmox Installation
 
