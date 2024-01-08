@@ -223,7 +223,7 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-11.png)
 
-- Next, we will create a new SSO domain for Vcenter. Enter a name for the SSO domain and a password that meets the minimum requirements. In this example, we will use `ccdc.lab` for the SSO domain name and the same password we used for the Vsphere root password. Click `Next` to continue.
+- Next, we will create a new SSO domain for Vcenter. Enter a name for the SSO domain and a password that meets the minimum requirements. In this example, we will use `ccdc.local` for the SSO domain name and the same password we used for the Vsphere root password. Click `Next` to continue.
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-12.png)
 
@@ -239,16 +239,26 @@ Vcenter is a management server for Vsphere that allows you to manage multiple Vs
 \
 ![Alt text](/Lab%20Setup/png/esxi/esxi1-vcenter-vm.png)
 
-- Once the installation is complete, you will be presented with the following screen. Click `Launch vSphere Client` to open the Vsphere client.
-\
-![Alt text](/Lab%20Setup/png/esxi/vcenter-installer-15.png)
-
 #### Adding Vsphere Hosts to Vcenter
 With Vcenter installed, we can now add the Vsphere hosts to Vcenter to create a Vsphere cluster. We will be adding all of the Vsphere hosts to Vcenter. 
 
 - To add a Vsphere host to Vcenter, open a web browser and navigate to the IP address of the Vcenter server. You will be presented with a warning about the site's security certificate. This is expected because we are using a self-signed certificate. Click `Advanced` and then `Accept the risk and Continue` to continue.
 \
 ![Alt text](/Lab%20Setup/png/esxi/vcenter-login-1.png)
+
+- Next, click on `Launch Vsphere Client` to open the Vsphere client to move to the login screen. The username will be administrator@ the SSO domain name you set during the Vcenter installation. In this example, we will use `administrator@ccdc.local`. Enter the password you set during the Vcenter installation and click `Login` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-login-2.png)
+
+- Once you have logged in, you will be presented with the following screen. Click `Hosts and Clusters` on the left menu to view the Vsphere hosts. Currently, there are no hosts in the cluster. Right click on the IP address of the Vcenter server and select `New Datacenter` to create a new datacenter for our hosts. We will name this datacenter `CCDC`. Click `OK` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-login-3.png)
+
+- With the Datacenter created, right click on the Datacenter and select `New Cluster` to create a new cluster. We will name this cluster `CCDC Cluster`. Enable `vSphere DRS`, `vSphere HA`, and `vSAN`. Select the checkbox for `Enable vSAN ESA` as well. Check the box to `Manage all hosts in the cluster with a single image` and select the option to `Import image from a new host`. You can also select the `Manage configuration at a cluster level` option to manage the cluster configuration from Vcenter. Click `Next` to continue.
+\
+![Alt text](/Lab%20Setup/png/esxi/vcenter-login-4.png)
+
+- 
 
 ## Part 2: Proxmox Installation
 
