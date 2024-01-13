@@ -103,5 +103,8 @@ auditctl -R /etc/rules/rules.d/audit.rules
 # add to /etc/rules/rules.d/audit.rules for monitoring the root execution syscall
 -a exit,always -F arch=b64 -F euid=0 -S execve -k  audit-wazuh-c
 -a exit,always -F arch=b32 -F euid=0 -S execve -k  audit-wazuh-c
+# below are some good auditctl rules that filter out processes that run root commands
+-a always,exit -F arch=b32 -S execve -F auid=0 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
+-a always,exit -F arch=b64 -S execve -F auid=0 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
 ```
 - check and make sure that audit is set for a log type in ossec.conf on the agent just like above
