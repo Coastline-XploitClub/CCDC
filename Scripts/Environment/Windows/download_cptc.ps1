@@ -1,5 +1,8 @@
 param (
-    [Parameter(Position = 0, Mandatory = $false)]
+    [Parameter(Position = 0, Mandatory = $true)]
+    [string]$url,
+
+    [Parameter(Position = 1, Mandatory = $true)]
     [string]$outputDir,
 
     [switch]$help
@@ -24,6 +27,7 @@ Usage: ./download_cptc.ps1 <output_directory>
 Download files from a specified URL to the given output directory.
 
 Arguments:
+  url                   The URL to download files from.
   output_directory      The directory where files will be downloaded.
 
 Options:
@@ -37,15 +41,15 @@ if ($help) {
 }
 
 # If $outputDir is not provided or is empty, exit and show help
-if (-not $outputDir) {
+if (-not $url -or -not $outputDir) {
     Show-Help
     exit
 }
 
 # Trim trailing slashes from output directory argument
 $outputDir = $outputDir.TrimEnd('\')
+$url = $url.TrimEnd('/')
 
-$url = "https://archive.wrccdc.org/images/2024/wrccdc-2024-invitationals-2/"
 $pageContent = Invoke-WebRequest -Uri $url
 
 # Filter the links to download based on extensions or specific filenames
