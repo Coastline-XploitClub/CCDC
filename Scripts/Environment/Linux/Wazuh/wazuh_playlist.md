@@ -105,3 +105,36 @@ auditctl -R /etc/rules/rules.d/audit.rules
 -a exit,always -F arch=b32 -F euid=0 -S execve -k  audit-wazuh-c
 ```
 - check and make sure that audit is set for a log type in ossec.conf on the agent just like above
+
+# Agentless monitoring (files and diff commands)
+- use /var/ossec/agentless/register_host.sh script to add a host to monitor
+```bash
+# with pub key authentication...check /var/ossec/logs/ossec.log to see if it worked!
+/var/ossec/agentless/register_host.sh add user@test.com NOPASS
+# with password, remember to do history -c after its in clear text
+/var/ossec/agentless/register_host.sh add user@test.com test_password
+# list hosts
+/var/ossec/agentless/register_host.sh list
+# install expect on wazuh server
+apt install -y expect
+# add to ossec.conf on server...I couldn' get this to trigger
+<agentless>
+  <type>ssh_integrity_check_bsd</type>
+  <frequency>20000</frequency>
+  <host>user@test.com</host>
+  <state>periodic</state>
+  <arguments>/bin /var/</arguments>
+</agentless>
+# the diff command however did work
+<agentless>
+  <type>ssh_generic_diff</type>
+  <frequency>20000</frequency>
+  <host>user@test.com</host>
+  <state>periodic_diff</state>
+  <arguments>ls -la /etc</arguments>
+</agentless>
+```
+- go to Discover and enter agentless.host:* to see events and add the fields to save a search for later
+
+# blocking ips
+
