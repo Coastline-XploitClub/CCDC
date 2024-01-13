@@ -51,15 +51,15 @@ $pageContent = Invoke-WebRequest -Uri $url
 # Filter the links to download based on extensions or specific filenames
 $targets = $pageContent.Links.Href | Where-Object { $_ -match "\.ova$|\.txt$|\.png$|\.csv$+" }
 
-foreach ($target in $targets) {
-    # Skip if not 7z or txt file just in case
+$scriptBlock = {
+    param($target, $url, $outputDir)
+
+    # Skip if not a valid file just in case
     if ($target -match "^/|^\?") {
-        continue
+        return
     }
 
     $outputPath = Join-Path -Path $outputDir -ChildPath $target
-
-    # Check if file already exists and skip
     if (Test-Path -Path $outputPath) {
         Write-Host -ForegroundColor Red -Object "$target already exists, skipping download."
     }
@@ -69,3 +69,13 @@ foreach ($target in $targets) {
         Invoke-WebRequest -Uri $downloadUrl -OutFile $outputPath
     }
 }
+
+foreach ($target in $targets) {
+    Start-Job -ScriptBlock $scriptBlock -ArgumentList $target, $url, $outputDir
+}
+
+# Wait for all jobs to complete
+Get-Job | Wait-Job
+
+# Clean up
+Get-Job | Remove-Job
