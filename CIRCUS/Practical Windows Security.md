@@ -81,7 +81,39 @@ Preserve via snapshot
 # creates memory.dmp file in current directory 
 ```
 - alternative is to capture ram on the live system using a tool like [ Belkasoft RAM Capturer ](https://belkasoft.com/ram-capturer) saves as a mem file
-- 
+```powershell
+# create sha1 hash of memory
+certutil -hashfile memory.dump > memory-hash.txt
+```
 ### Disc Acquisition
+- if vmdk is split into multiple files can use vmware-vdiskmanager.exe -r <main_vmdk.vmdk> -t 0 single-vmdk.vmdk
+- virtualbox can clone medium with vboxmanage clonemedium disk command.  I didn not use virtualbox so I created the disc image directly from vmdk to Encase format using FTK imager
+- FTK can also create disk image in dd format, this may come in handy.
+### Mount the disk drive
+- Mount drive using Arsenal as "write temporary" this allows changes to either be saved to "differencing" file or only exist in RAM.  Does not make permanent changes to the disk.  
+### Windows File Artifacts
+- look for file artifacts to use for triage (selecting portions of the disc for examination).
+```cmd
+dir /a
+```
+more artifacts relating to the NTFS filesystem can be viewed via FTK imager.  To create a triage collection of commonly used items we will use Kape, and the kape triage collection
 
-
+### exploring the registry
+registry keeps track of history of file explorer etc.  Used to make the user experience better.  We can use this to analyze 
+- HKEY USERS - user information, symlinked in HKEY CURRENT USER in the live system
+- HKEY LOCAL MACHINE, Windows information.  Current Control set is the configuration for windows, of which there may be more than one. To find which one is being used go to HKEY_LOCAL_MACHINE/SYSTEM/SELECT/LASTKNOWNGOOD
+- Kape consolidated many of the registry keys in Windows/System32/config for the system hives such as SAM, Security, Software and system
+- NTUSER.DAT is linked to HKEY_USERS, HKEY_CURRENT_USER
+- usrclass.dat user behavior found in AppData Local MicroSoft Windows
+- F:\Windows\System32\config is the location of the registry hive files if we navigate with cmd and do a dir /a we can see the transaction logs
+- dirty registry hives have not been written to with the latest changes, so we would need to merge them.
+#### RegRipper and Registry Explorer
+- Registry Explorer uses predefined bookmarks to give us a better view of the hives
+- RegRipper command line tool can specify a plugin to give us succint information based on what we are looking for.
+```powershell
+rip.exe -l | findstr "plugin"
+# search for a plugin by keyword
+rip.exe -l -c > file.csv
+# export all plugins to a csv file for easy search
+```
+  
