@@ -24,7 +24,7 @@ download distribution from [ manual distro download microsoft ](https://docs.mic
 Add-AppxPackage <distro file>
 ```
 ### other settings
-- Set timezone to UTC 
+- Set timezone to UTC, all registry entries are in UTC since WINDOWS XP
 ```powershell
 Set-Timezone -Id "UTC"
 ```
@@ -86,7 +86,10 @@ Preserve via snapshot
 certutil -hashfile memory.dump > memory-hash.txt
 ```
 ### Disc Acquisition
-- if vmdk is split into multiple files can use vmware-vdiskmanager.exe -r <main_vmdk.vmdk> -t 0 single-vmdk.vmdk
+- if vmdk is split into multiple files can use 
+```powershell
+vmware-vdiskmanager.exe -r <main_vmdk.vmdk> -t 0 single-vmdk.vmdk
+```
 - virtualbox can clone medium with vboxmanage clonemedium disk command.  I didn not use virtualbox so I created the disc image directly from vmdk to Encase format using FTK imager
 - FTK can also create disk image in dd format, this may come in handy.
 ### Mount the disk drive
@@ -116,4 +119,22 @@ rip.exe -l | findstr "plugin"
 rip.exe -l -c > file.csv
 # export all plugins to a csv file for easy search
 ```
-  
+```powershell
+# look for ip address, dns etc
+rip -r SYSTEM -p nic2
+# what networks was the machine connected to?
+rip -r SYSTEM -p networklist
+# shutdown time
+rip -r SYSTEM -p shutdown
+# windows defender
+rip -r SOFTWARE -p defender
+```
+- parse the entire hives
+```powershell
+# remove the hidden attributes of NTUSER.DAT files
+# see attributes
+attrib
+#remove hidden
+attrib -h <FILENAME>
+```
+
