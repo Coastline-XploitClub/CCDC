@@ -21,3 +21,7 @@ Many windows artifacts are due to capabilities that make the Windows User Experi
   4. SOFTWARE
   5. SYSTEM
 - in each user directory there are two more hives NTUSER.DAT and USERCLASS.DAT both hidden files -- use attrib command in cmd... [ attrib docs ]( https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/attrib )
+  1. NTUSER.DAT C:\Users\User
+  2. USRCLASS.DAT C:\Users\User\AppData\Local\Microsoft\Windows
+  3 AMCACHE.HVE C:\Windows\AppCompat\Programs\Amcahce.hve
+![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/7aa35000-29f6-4936-8ea0-35417606f982)
