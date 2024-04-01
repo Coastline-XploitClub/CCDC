@@ -136,5 +136,20 @@ rip -r SOFTWARE -p defender
 attrib
 #remove hidden
 attrib -h <FILENAME>
+#for loop through directory with rip -a
+foreach ($i in gci){rip -a -r $i > $i.txt}
 ```
 
+### user assist
+- applications last opened (in NTUSER.DAT)
+```powershell
+rip -r .\NTUSER.DAT -p userassist
+```
+NTUSER\Software\Microsoft\CurrentVersion\Explorer\UserAssist
+### recent Docs
+
+- folders last used (NTUSER.DAT)
+  ```powershell
+   rip -r .\NTUSER.DAT -p recentdocs
+```
+Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
