@@ -150,7 +150,7 @@ NTUSER\Software\Microsoft\CurrentVersion\Explorer\UserAssist
 ### recent Docs
 
 - folders last used (NTUSER.DAT)
-  ```powershell
+```powershell
    rip -r .\NTUSER.DAT -p recentdocs
 ```
 Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
@@ -160,10 +160,14 @@ Built into Microsoft Windows is the ability for the operating system to track us
 to the user and can be found in both NTUSER.DAT and USRCLASS.DAT
 NTUSER.DAT:
 HKCU\Software\Microsoft\Windows\Shell\BagMRU
+
 HKCU\Software\Microsoft\Windows\Shell\Bags
+
 USRCLASS.DAT:
+
 Local Settings\Software\Microsoft\Windows\Shell\BagMRU
 Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags
+
 ```powershell
 rip -r .\UsrClass.dat -p shellbags
 # or use eric zimmerman shellbags explorer.  This will show folder names as well as dates modified and dates accessed.
