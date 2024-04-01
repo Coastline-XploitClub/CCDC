@@ -144,8 +144,9 @@ foreach ($i in gci){rip -a -r $i > $i.txt}
 - applications last opened (in NTUSER.DAT)
 ```powershell
 rip -r .\NTUSER.DAT -p userassist
-```
+
 NTUSER\Software\Microsoft\CurrentVersion\Explorer\UserAssist
+```
 ### recent Docs
 
 - folders last used (NTUSER.DAT)
@@ -153,3 +154,18 @@ NTUSER\Software\Microsoft\CurrentVersion\Explorer\UserAssist
    rip -r .\NTUSER.DAT -p recentdocs
 ```
 Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+### shellbags
+
+Built into Microsoft Windows is the ability for the operating system to track user window viewing preferences specific to Windows Explorer. These are tied
+to the user and can be found in both NTUSER.DAT and USRCLASS.DAT
+NTUSER.DAT:
+HKCU\Software\Microsoft\Windows\Shell\BagMRU
+HKCU\Software\Microsoft\Windows\Shell\Bags
+USRCLASS.DAT:
+Local Settings\Software\Microsoft\Windows\Shell\BagMRU
+Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags
+```powershell
+rip -r .\UsrClass.dat -p shellbags
+# or use eric zimmerman shellbags explorer.  This will show folder names as well as dates modified and dates accessed.
+./SBECmd.exe -d C:\Cases\Analysis\Registry\Users\Administrator\ --csv C:\Cases\Analysis\ --csvf administrator_shell_bags.csv
+```
