@@ -35,5 +35,138 @@ Many windows artifacts are due to capabilities that make the Windows User Experi
 - Kape
 - Autopsy
 - FTK Imager
-  
+## Registry viewing tools
+- Registry Explorer (Zimmermans tools)
+  Takes into consideration transaction logs and can use Bookmarks to condense output
+- Registry Viewer (Extero)
+- Regripper [ reg ripper github ](https://github.com/keydet89/RegRipper3.0)
+  Regripper does not take transaction history into account would have to merge transaction logs if hive was "dirty"
 
+### basic enumeration
+- OS details
+```powershell
+# SOFTWARE hive
+SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION
+```
+- Control set (startup configuration)
+- to find the current control set we look for the control set witht he value "last known good" HKLM\SELECT\LASTKNOWNGOOD here it referred to by number 
+- In SYSTEM hive
+- CURRENT CONTROL SET is a volatile hive representing the current configuration.  
+
+- Computer Name
+```powershell
+SYSTEM\CurrentControlSet\Control\ComputerName\Computername
+```
+- Timezone
+```powershell
+SYSTEM\CurrentContolSet\Control\TimeZoneInformation
+```
+- Network Interfaces and past Networks
+```powershell
+SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
+# each interface is represented by a GUID.
+# Past networks are found at
+SOFTWARE\Microsoft\Windows NT\Current Version\NetworkList\Signatures\Unmanaged
+SOFTWARE\Microsoft\Windows NT\Current Version\NetworkList\Signatures\Managed
+```
+- Autoruns
+```powershell
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+
+SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+
+SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+```
+Services found at 
+```powershell
+SYSTEM\CurrentControlSet\Services
+# if service has start key of value 0x02 it will start at boot
+```
+- User information
+```powershell
+SAM\DOMAINS\Account\Users
+```
+### Recent Files
+```powershell
+NTUSER.DAT\Software\Microsoft\CurrentVersion\Explorer\RecentDocs
+```
+- sorted by time and file type in Registry Explorer
+- Microsoft office files found in NTUSER.DAT\Software\Microsoft\Office\<version>
+
+### ShellBags
+changes in layout of windows can store information about last used folders/files
+```powershell
+NT.Userclass.DAT\Local Settings\Software\Microsoft\Windows\Shell\Bags
+USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\BagMRU
+
+NTUSER.DAT\Software\Microsoft\Windows\Shell\BagMRU
+
+NTUSER.DAT\Software\Microsoft\Windows\Shell\Bags
+```
+Registry explorer doesn't show much about shellbags but Eric Zimmermans ShellBags explorer does
+- Last visited MRUS
+  can derive files last used by what the open as or save to dialogs present.
+```powershell
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePIDlMRU
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
+```
+- Paths typed into Window Explorer address bars
+```powershell
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery
+```
+### Evidence of Execution
+- UserAssist registry keys
+- Does not show evidence of command line commands
+```powershell
+NTUSER.DAT\Software\Microsoft\Windows\Currentversion\Explorer\UserAssist\{GUID}\Count
+```
+- ShimCache tracks compatibility with applications and OS, therefore keeps a record of applications run
+```
+SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache\
+```
+Registry Explorer does work with the ShimCache well, so we can use the AppCompatCacheParser from Eric Zimmerman's Tools
+takes input from the SYSTEM hive
+```powershell
+AppCompatCacheParser.exe --csv <path to save output> -f <path to SYSTEM hive for data parsing> --c <control set to parse>
+```
+- Try Using EZ view with the csvs that this tool generates (also in Eric Zimmermans tools)
+- AmCache is related to ShimCache it hold execution time, path and a SHA1 hash
+```powershell
+C:\Windows\appcompat\Programs\Amcache.hve
+
+# Information about the last executed programs can be found at the following location in the hive:
+
+Amcache.hve\Root\File\{Volume GUID}\
+```
+- BAM and DAM (Background Activity Monitor, Desktop Activity Monitor)
+- BAM keeps track of backgroud processes
+- DAM keeps track of desktop utilization
+- ```powershell
+  SYSTEM\CurrentControlSet\Services\bam\UserSettings\{SID}
+
+  SYSTEM\CurrentControlSet\Services\dam\UserSettings\{SID}
+  ```
+  ### External Devices/ USB forensics
+  ```powershell
+  SYSTEM\CurrentControlSet\Enum\USBSTOR
+
+  SYSTEM\CurrentControlSet\Enum\USB
+  # First and last time connected
+  SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial#\Properties\{83da6326-97a6-4088-9453-a19231573b29}\####
+  # Usb device volume name
+  SOFTWARE\Microsoft\Window Portable Devices\Devices
+  ```
+  | Value | Information |
+  | ----- | ----------- |
+  |   0064	| First Connection time |
+  |  0066 |	Last Connection time |
+  |0067 	| Last removal time |    
+  
+  
