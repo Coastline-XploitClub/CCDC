@@ -6,3 +6,7 @@
 ```powershell
 Get-WinEvent -FilterHashTable @{LogName='System'; ID='7045'} | fl
 ```
+### Create file hash
+```powershell
+Get-Filehash -Algorithm MD5 <file>
+```
