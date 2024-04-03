@@ -12,4 +12,10 @@
 | 7045   | a new service was installed (System) |
 | 4967     | a new service was installed (Security) |
 
-
+## maunally checking scheduled tasks
+- check next run time, privileges, triggers, and command.
+- can be set with an auto deletion feature
+- C:\Windows\System32\Tasks
+```powershell
+Get-ScheduledTask | ? {$_.Date -ne $null -and $_.State -ne "Disabled"} | sort-object Date | select Date,TaskName,Author,State,TaskPath | ft
+```
