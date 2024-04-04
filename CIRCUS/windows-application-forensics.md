@@ -18,4 +18,56 @@
 - C:\Windows\System32\Tasks
 ```powershell
 Get-ScheduledTask | ? {$_.Date -ne $null -and $_.State -ne "Disabled"} | sort-object Date | select Date,TaskName,Author,State,TaskPath | ft
+# get next run time
+Get-ScheduledTask -Taskname <name> | Get-ScheduledTaskInfo
 ```
+## manually checking services
+- services.msc
+  - look for services set to Automatic Start
+  - audit the users the services run as
+  - inspect what happens if the service fails (script can be enabled here for persistence)
+- registry
+  - HKLM\SYSTEM\CurrentControlSet\Services
+    - for instance the Amazon SSM service is located at: HKLM\SYSTEM\CurrentControlSet\Services\AmazonSSMAgent
+    - right click the key in the left side panel and export to txt file to reveal last write time
+      ```powershell
+        Key Name:          HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AmazonSSMAgent
+        Class Name:        <NO CLASS>
+        Last Write Time:   3/17/2021 - 3:09 PM
+      ```
+  - Powershell
+    - ```
+      powershell Get-Service | Where-Object {$_.Status -eq "Running" -and $_.StartType -eq "Automatic"}
+      ```
+    - github script to get registry last write time [ https://github.com/WiredPulse/PowerShell/blob/master/Registry/Get-RegWriteTime.ps1 ](https://github.com/WiredPulse/PowerShell/blob/master/Registry/Get-RegWriteTime.ps1)
+    - Import-Module then...
+      ```powershell
+                 
+      PS C:\Users\Administrator> Import-Module C:\Tools\Get-RegWriteTime.ps1;
+      $services = Get-Service | Where-Object {$_.Status -eq "Stopped" -and $_.StartType -eq "Automatic"}
+      
+      foreach ($service in $services) {
+          $serviceName = $service.Name
+          $serviceWMI = (Get-WmiObject Win32_Service | Where-Object { $_.Name -eq $serviceName })
+          $serviceDisplayName = $service.DisplayName
+          $serviceStatus = $service.Status
+          $servicePath = $serviceWMI.PathName
+          $serviceUser = $serviceWMI.StartName
+          $serviceLastWriteTime = Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\$serviceName | Get-RegWriteTime | Select LastWriteTime
+
+            Write-Host "Service Name: $serviceName"
+            Write-Host "Display Name: $serviceDisplayName"
+            Write-Host "Service Status: $serviceStatus"
+            Write-Host "Executable Path: $servicePath"
+            Write-Host "User Context: $serviceUser"
+            Write-Host "Last Write Time: $serviceLastWriteTime"
+            Write-Host ""
+        }
+```
+      # or for a single service do Import-Module then (where $sn is the Get-Service.Name object)
+  
+
+      Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\$sn | Get-RegWriteTime | Select LastWriteTime
+
+  ```
+
