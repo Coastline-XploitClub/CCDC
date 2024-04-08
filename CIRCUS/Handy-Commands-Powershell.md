@@ -64,5 +64,9 @@ foreach ($service in $services) {
     Write-Host ""
 }
 ```
+### add an executable to the path
+```powershell
+$env:Path += ";C:\Users\user\AppData\Local\Programs\oh-my-posh\bin"
+```
 
 
