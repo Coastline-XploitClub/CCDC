@@ -65,9 +65,25 @@ Get-ScheduledTask -Taskname <name> | Get-ScheduledTaskInfo
         }
 ```
       # or for a single service do Import-Module then (where $sn is the Get-Service.Name object)
-  
-
-      Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\$sn | Get-RegWriteTime | Select LastWriteTime
+Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\$sn | Get-RegWriteTime | Select LastWriteTime
 
   ```
+## Detecting Browser artifacts
+### firefox
+- located in AppData\Roaming\Mozilla\Firefox\Profiles
+  
+| directory | contents | file type |
+| --------- | -------- | -------- |
+| places.sqlite | browsing history, bookmarks | sqlite |
+| logins.json key4.db | creds saved in the browser | json sqlite |
+| cookies.sqlite | cookies | sqlite |
+| extensions.json | extensions | json |
+| favicons.sqlite | favicon metadata | sqlite |
+| sessionstore backups | sessions tabs metadata | jasonlz4 |
+| formhistory.sqlite | input data | sqlite |
+
+
+  
+
+      
 
