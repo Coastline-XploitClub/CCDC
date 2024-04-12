@@ -112,5 +112,35 @@ Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\$sn | Get-RegWriteTime | Select
 - moz annos
   - needs correlation of place id but shows metadata
 - check documentation for each applications cookies
+### google chrome
+- stored in AppData\Local\Google\Chrome\User Data
+- User profiles stored in Default
+- 
+| History    | Contains the browsing history and download metadata.                      | SQLite                             |
+|------------|---------------------------------------------------------------------------|------------------------------------|
+| Login Data | Contains credentials saved through the browser.                           | SQLite                             |
+| Extensions | This directory includes all artefacts related to Chrome extensions.       | Folder (JavaScript and meta files) |
+| Cache      | This directory includes cached files stored to optimise the site loading. | Folder                             |
+| Sessions   | Handles sessions and tabs metadata.                                       | Folder                             |
+| Bookmarks  | Handles bookmark metadata.                                                | JSON                               |
+| Web Data   | Contains input data submitted by the user in web forms.                   | SQLite                             |
       
-
+```sqlite3
+enumerate tables in a database sqlite3
+.tables #or
+SELECT 
+    name
+FROM 
+    sqlite_schema
+WHERE 
+    type ='table' AND 
+    name NOT LIKE 'sqlite_%';
+# enumerate column names from 'logins'
+SELECT name FROM PRAGMA_TABLE_INFO('logins');
+```
+- Analyze Extensions for malicious ones
+  - in C:\users\<user>\AppData\Local\Google\Chrome\User Data\Default\Extensions there are obscured names of extensions each will have a version and a **manifest.json** file with details
+  - also there may be javascript files in this directory that you could analyze to determine the extensions functionality
+### microsoft edge
+- user data stored in AppData\Local\Microsoft\Edge\User Data\Default
+- view edge cache using chromecacheview [ https://github.com/Seabreg/chromecacheview ](https://github.com/Seabreg/chromecacheview)
