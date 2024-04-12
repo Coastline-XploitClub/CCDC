@@ -157,9 +157,10 @@ SELECT name FROM PRAGMA_TABLE_INFO('logins');
   SELECT timestamp,url,title,value FROM timeline WHERE type = 'download' LIMIT 0,30
   # cookie metadata
   SELECT type,origin,key,value FROM 'storage' LIMIT 0,30
-```
+  ```
 - you can also download the sqlite version of a table
 pictured below, query for a specific url found mismatched url and page description
+
 ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/4a1e8bca-ab31-47bf-b192-8534b366142e)
 
 
