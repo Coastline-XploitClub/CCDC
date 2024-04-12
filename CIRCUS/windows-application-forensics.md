@@ -143,4 +143,23 @@ SELECT name FROM PRAGMA_TABLE_INFO('logins');
   - also there may be javascript files in this directory that you could analyze to determine the extensions functionality
 ### microsoft edge
 - user data stored in AppData\Local\Microsoft\Edge\User Data\Default
+#### chromecacheview
 - view edge cache using chromecacheview [ https://github.com/Seabreg/chromecacheview ](https://github.com/Seabreg/chromecacheview)
+  - select cache file, open
+  ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/bc8fc487-252c-41d2-8fdc-0040393874bf)
+- Note that the cached metadata can only be considered as a piece of supporting information during investigations. Combining all the information from the other artefacts, such as exact URLs accessed or cookies, is still essential
+#### hindsight
+[ https://github.com/obsidianforensics/hindsight ](https://github.com/obsidianforensics/hindsight)
+- once its up and running you can run sqlite3 queries right in the browser!
+  ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/08578743-ae96-4473-994c-7e49a6e4fcc2)
+  ```powershell
+  Select timestamp,url,title,visit_duration,visit_count,typed_count FROM 'timeline' WHERE type ='url' LIMIT 0,30
+  SELECT timestamp,url,title,value FROM timeline WHERE type = 'download' LIMIT 0,30
+  # cookie metadata
+  SELECT type,origin,key,value FROM 'storage' LIMIT 0,30
+```
+- you can also download the sqlite version of a table
+pictured below, query for a specific url found mismatched url and page description
+![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/4a1e8bca-ab31-47bf-b192-8534b366142e)
+
+
