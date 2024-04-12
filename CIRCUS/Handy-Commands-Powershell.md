@@ -1,3 +1,7 @@
+### mount a drive
+```powershell
+New-PSDrive -Name "N" -Root "\\192.168.220.129\Finance" -PSProvider "FileSystem"
+```
 ### Convert string from Base64
 ```powershell
 [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String('<base64 encoded string here>'))
