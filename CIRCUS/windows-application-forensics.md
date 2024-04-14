@@ -163,4 +163,10 @@ pictured below, query for a specific url found mismatched url and page descripti
 
 ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/4a1e8bca-ab31-47bf-b192-8534b366142e)
 
+### Outlook
+- AppData\Local\Microsoft\Outlook\
+```powershell
+# enumerate all users Directories for Outlook
+ls C:\Users\ | foreach {ls "C:\Users\$_\AppData\Local\Microsoft\Outlook\" 2>$null | findstr Directory}
+```
 
