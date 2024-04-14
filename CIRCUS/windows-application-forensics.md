@@ -169,4 +169,14 @@ pictured below, query for a specific url found mismatched url and page descripti
 # enumerate all users Directories for Outlook
 ls C:\Users\ | foreach {ls "C:\Users\$_\AppData\Local\Microsoft\Outlook\" 2>$null | findstr Directory}
 ```
+- **ost** files in this directory serve as local copies of emails.  These will be synchronized when connected to the internet, so these would be before that.
+- use a tool called XstReader to open ost files
+  [https://github.com/Dijji/XstReader](https://github.com/Dijji/XstReader)
+- phishing is done regularly with attachments so check those
+- the cache for opened files is at AppData\Local\Microsoft\Windows\INetCache\Content.Outlook but only before the client is closed
+- check links in emails to see if they correlate with other data
+- email headers can be seen by selected properties in the bottom corner of Xst Reader
+  ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/e1217e08-9891-4ed6-ba69-14ce5c6ae17f)
+  - xmailer may indicate the mail client used
+
 
