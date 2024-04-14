@@ -176,6 +176,7 @@ ls C:\Users\ | foreach {ls "C:\Users\$_\AppData\Local\Microsoft\Outlook\" 2>$nul
 - the cache for opened files is at AppData\Local\Microsoft\Windows\INetCache\Content.Outlook but only before the client is closed
 - check links in emails to see if they correlate with other data
 - email headers can be seen by selected properties in the bottom corner of Xst Reader
+  
   ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/e1217e08-9891-4ed6-ba69-14ce5c6ae17f)
   
   - xmailer may indicate the mail client used
