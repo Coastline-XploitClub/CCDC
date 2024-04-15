@@ -192,3 +192,9 @@ ls C:\Users\ | foreach {ls "C:\Users\$_\AppData\Local\Microsoft\Outlook\" 2>$nul
 | message     | **conversationId**  - Unique identifier of the conversation thread. Combining the messages  with the same ID can retrieve the complete message thread. **composetime / createdTime** - Timestamp when the message is created. **content** - The actual message sent. **creator** - The message's sender in the MRI value. This can be translated by correlating the value in the contact record_type. **isFromMe** - Provides the direction of the message, whether it was sent or received by the owner of the Teams metadata. **properties** - Contains additional parameters, such as time of edit (when the message is edited) or file attachment details. |
 
 
+- use the tool
+```powershell
+C:\Users\Administrator> C:\Tools\ms_teams_parser.exe -f C:\Users\mike.myers\AppData\Roaming\Microsoft\Teams\IndexedDB\https_teams.microsoft.com_0.indexeddb.leveldb\ -o output.json
+```
+
+
