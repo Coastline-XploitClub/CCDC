@@ -4,7 +4,7 @@ wazuh_install_script_path="./wazuh-install.sh"
 function check_command {
 	if [ $? -ne 0 ]; then
 		echo "error...exiting"
-  		exit 1
+		exit 1
 	else
 		echo "...success..."
 	fi

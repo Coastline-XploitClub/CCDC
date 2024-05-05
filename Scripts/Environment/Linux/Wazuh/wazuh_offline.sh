@@ -2,7 +2,7 @@
 function check_command {
 	if [ $? -ne 0 ]; then
 		echo "error...exiting and removing wazuh-install directory"
-  		exit 1
+		exit 1
 	else
 		echo "...success..."
 	fi
@@ -11,20 +11,20 @@ function check_command {
 #check if user is root
 
 if [ $(id -u) != 0 ]; then
-    echo "script must be run as root..exiting"
-        exit 1
+	echo "script must be run as root..exiting"
+	exit 1
 fi
 
 # check working directory for existing wazuh-install directory
 if [ -d ./wazuh-install ]; then
-    read -p "wazuh install directory exists is it ok to delete(y/n)?" choice
-    if [ "$choice" == 'y' ] || [ "$choice" == 'Y' ];then
-        rm -rf ./wazuh-install
-        echo "...deleted..."
-    else
-        echo "ok...exiting"
-        exit 1
-    fi  
+	read -p "wazuh install directory exists is it ok to delete(y/n)?" choice
+	if [ "$choice" == 'y' ] || [ "$choice" == 'Y' ]; then
+		rm -rf ./wazuh-install
+		echo "...deleted..."
+	else
+		echo "ok...exiting"
+		exit 1
+	fi
 fi
 
 #create wazuh-install directory where
@@ -34,17 +34,17 @@ wazuh_archive="wazuh-offline.tar.gz"
 certificate_directory="wazuh-certificates"
 echo "copy archive and certificate folder to $(pwd)"
 while [ ! -f "$wazuh_archive" ] || [ ! -d "$certificate_directory" ]; do
-    echo "checking..."
-    sleep 5
+	echo "checking..."
+	sleep 5
 done
 #check file hash of transfered files
 
 echo "both wazuh-offline.tar.gz and the wazuh-certificates directory added!"
 # check if tar is installed
-if ! command -v tar >/dev/null 2>&1 ; then
-        echo "system needs tar installed...exiting"
-        rm -rf "$wazuh_directory"
-        exit 1
+if ! command -v tar >/dev/null 2>&1; then
+	echo "system needs tar installed...exiting"
+	rm -rf "$wazuh_directory"
+	exit 1
 fi
 
 # extract archive
@@ -52,9 +52,9 @@ tar xf wazuh-offline.tar.gz
 
 #check if dpkg is installed
 if ! command -v dpkg >/dev/null 2>&1; then
-        echo "system needs dpkg installed...exiting"
-        rm -rf "$wazuh_directory"
-        exit 1
+	echo "system needs dpkg installed...exiting"
+	rm -rf "$wazuh_directory"
+	exit 1
 fi
 
 dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
@@ -90,9 +90,9 @@ systemctl enable wazuh-manager
 systemctl start wazuh-manager
 systemctl status wazuh-manager
 dpkg -i ./wazuh-offline/wazuh-packages/filebeat*.deb
-cp ./wazuh-offline/wazuh-files/filebeat.yml /etc/filebeat/ &&\
-cp ./wazuh-offline/wazuh-files/wazuh-template.json /etc/filebeat/ &&\
-chmod go+r /etc/filebeat/wazuh-template.json
+cp ./wazuh-offline/wazuh-files/filebeat.yml /etc/filebeat/ &&
+	cp ./wazuh-offline/wazuh-files/wazuh-template.json /etc/filebeat/ &&
+	chmod go+r /etc/filebeat/wazuh-template.json
 filebeat keystore create
 echo admin | filebeat keystore add username --stdin --force
 echo admin | filebeat keystore add password --stdin --force

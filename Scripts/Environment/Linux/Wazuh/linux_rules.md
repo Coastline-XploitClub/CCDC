@@ -1,4 +1,5 @@
 # tested auditd rules linux
+
 ```bash
 <!-- Local rules -->
 
@@ -36,14 +37,14 @@
        <if_sid>80792</if_sid>
        <field name="audit.exe">/usr/bin/sudo</field>
        <description>Auditd: Sudo command detected used by user: $(audit.uid) command: $(audit.execve.a0) $(audit.execve.a1) $(audit.execve.a2) $(audit.execve.a3)</description>
-    <group>audit_command</group>   
-    </rule>   
+    <group>audit_command</group>
+    </rule>
     <rule id="100004" level="6">
        <if_sid>80792</if_sid>
        <field name="audit.euid">0</field>
        <field name="audit.egid">0</field>
        <description>Auditd: commands run as root $(audit.file.name) $(audit.execve.a0) $(audit.execve.a1) $(audit.execve.a2) $(audit.execve.a3)</description>
        <group>audit_command</group>
-    </rule>    
+    </rule>
 </group>
 ```

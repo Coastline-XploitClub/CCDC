@@ -17,7 +17,7 @@
   - [ ] Check Default Password Policy via Group Policy
   - [ ] Find users with pre-auth disabled (Kerberos) and enable
   - [ ] Find users with Service Principal Names (SPN) and document.
-        
+
 - ### Joseph
 
   - [ ] Identify the Windows Clients and create an administrative user account for yourself.
@@ -29,7 +29,7 @@
   - [ ] Enable Domain Password Policy via Group Policy (Computer Configuration/Policies/Windows Settings/Security Settings/Account Policies)
   - [ ] Enable UAC for all Users via Group Policy (Computer Configuration /Policies /Windows Settings / Security Settings / Local Policies/ Security Options)
   - [ ] Enable Account Lockout Policy (Computer Configuration/Policies/ Windows Settings/ Security Settings/Account Policies)
-  - [ ] 
+  - [ ]
 
 ## Linux
 
@@ -57,11 +57,12 @@
 ## Networking / Firewall
 
 ### Aaron
-  - [ ] Change default password ASAP.
-  - [ ] Create new admin user and disable original "admin" user.
-  - [ ] Disable SSH access to Firewall. 
-  - [ ] Allow access to pfSense web interface from only 1 IP Address (your jumpbox).
-  - [ ] Work on establishing firewall rules given hostnames and IP addresses from team, time permitting.
+
+- [ ] Change default password ASAP.
+- [ ] Create new admin user and disable original "admin" user.
+- [ ] Disable SSH access to Firewall.
+- [ ] Allow access to pfSense web interface from only 1 IP Address (your jumpbox).
+- [ ] Work on establishing firewall rules given hostnames and IP addresses from team, time permitting.
 
 ## Business Injects
 
