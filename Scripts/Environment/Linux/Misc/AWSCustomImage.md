@@ -37,19 +37,19 @@ Create a file named `trust-policy.json` containing the following policy:
 
 ```json
 {
-   "Version": "2012-10-17",
-   "Statement": [
-      {
-         "Effect": "Allow",
-         "Principal": { "Service": "vmie.amazonaws.com" },
-         "Action": "sts:AssumeRole",
-         "Condition": {
-            "StringEquals":{
-               "sts:Externalid": "vmimport"
-            }
-         }
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": { "Service": "vmie.amazonaws.com" },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:Externalid": "vmimport"
+        }
       }
-   ]
+    }
+  ]
 }
 ```
 
@@ -63,45 +63,41 @@ Create a file named `role-policy.json` with the following policy:
 
 ```json
 {
-   "Version":"2012-10-17",
-   "Statement":[
-      {
-         "Effect": "Allow",
-         "Action": [
-            "s3:GetBucketLocation",
-            "s3:GetObject",
-            "s3:ListBucket"
-         ],
-         "Resource": [
-            "arn:aws:s3:::coastlinelab-test",
-            "arn:aws:s3:::coastlinelab-test/*"
-         ]
-      },
-      {
-         "Effect": "Allow",
-         "Action": [
-            "s3:GetBucketLocation",
-            "s3:GetObject",
-            "s3:ListBucket",
-            "s3:PutObject",
-            "s3:GetBucketAcl"
-         ],
-         "Resource": [
-            "arn:aws:s3:::coastlinelab-exports",
-            "arn:aws:s3:::coastlinelab-exports/*"
-         ]
-      },
-      {
-         "Effect": "Allow",
-         "Action": [
-            "ec2:ModifySnapshotAttribute",
-            "ec2:CopySnapshot",
-            "ec2:RegisterImage",
-            "ec2:Describe*"
-         ],
-         "Resource": "*"
-      }
-   ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetBucketLocation", "s3:GetObject", "s3:ListBucket"],
+      "Resource": [
+        "arn:aws:s3:::coastlinelab-test",
+        "arn:aws:s3:::coastlinelab-test/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "s3:GetBucketAcl"
+      ],
+      "Resource": [
+        "arn:aws:s3:::coastlinelab-exports",
+        "arn:aws:s3:::coastlinelab-exports/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:ModifySnapshotAttribute",
+        "ec2:CopySnapshot",
+        "ec2:RegisterImage",
+        "ec2:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
 }
 ```
 
@@ -133,8 +129,8 @@ Create a `manifest.json` file that specifies the image using an S3 bucket:
     "Description": "My Server OVA",
     "Format": "ova",
     "UserBucket": {
-        "S3Bucket": "coastlinelab-test",
-        "S3Key": "vms/<ova_file>"
+      "S3Bucket": "coastlinelab-test",
+      "S3Key": "vms/<ova_file>"
     }
   }
 ]
