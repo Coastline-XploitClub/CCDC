@@ -352,7 +352,9 @@ sudo iptables -A INPUT -j DROP
 save configs:
 sudo iptables-save
 
-
+---
+set to restore from backup after 5 minutes if you are unsure of effect of iptables changes
+echo "mv /etc/sysconfig/iptables.bak /etc/sysconfig/iptables && service iptables restart" | at now + 5min
 ----------
 Uncomplicated Firewall, UFW, https://help.ubuntu.com/community/UFW
 
