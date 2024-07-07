@@ -10,17 +10,17 @@ ENDCOLOR="\e[0m"
 URL='https://archive.wrccdc.org/images/2022/wrccdc-2022-invitationals/'
 
 files=(
-    'bubble.lol.ova'
-    'cptspaulding-alt.lol.ova'
-    'cptspaulding.loldonotuse.ova'
-    'drrockso.lol.ova'
-    'freddie.lol.ova'
-    'happyslappy.lol.ova'
-    'joker.lol.ova'
-    'pesky.lol.ova'
-    'ronaldmcdonald.lol.ova'
-    'sideshowbob.lol.ova'
-    'wearywillie.lol.ova'
+	'bubble.lol.ova'
+	'cptspaulding-alt.lol.ova'
+	'cptspaulding.loldonotuse.ova'
+	'drrockso.lol.ova'
+	'freddie.lol.ova'
+	'happyslappy.lol.ova'
+	'joker.lol.ova'
+	'pesky.lol.ova'
+	'ronaldmcdonald.lol.ova'
+	'sideshowbob.lol.ova'
+	'wearywillie.lol.ova'
 )
 
 # mkdir images
@@ -28,8 +28,8 @@ files=(
 mkdir -p images && cd images || exit
 
 for file in "${files[@]}"; do
-    echo -e "${BOLDGREEN}Downloading ${file}...${ENDCOLOR}"
-    wget -k "${URL}${file}" &
-    sleep 15
-    echo -e "${ITALICRED}Done!${ENDCOLOR}"
+	echo -e "${BOLDGREEN}Downloading ${file}...${ENDCOLOR}"
+	wget -k "${URL}${file}" &
+	sleep 15
+	echo -e "${ITALICRED}Done!${ENDCOLOR}"
 done

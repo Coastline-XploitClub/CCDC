@@ -163,6 +163,4 @@ pictured below, query for a specific url found mismatched url and page descripti
 
 ![image](https://github.com/Coastline-XploitClub/CCDC/assets/85032657/4a1e8bca-ab31-47bf-b192-8534b366142e)
 
-### Microsoft Outlook
-
 

@@ -7,7 +7,7 @@ def main() -> None:
     while True:
         session: boto3.Session = boto3.Session(region_name="us-west-2")
         ec2: boto3.client = session.client("ec2")
-        response: json = ec2.describe_instances(
+        response = ec2.describe_instances(
             Filters=[{"Name": "instance-state-name", "Values": ["running"]}]
         )
         instances = response["Reservations"]

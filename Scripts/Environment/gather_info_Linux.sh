@@ -20,7 +20,7 @@ cat /etc/os-release
 
 # Installed software including versions
 echo -e "\n6. Installed software including versions:"
-dpkg -l 
+dpkg -l
 
 # All open ports and services
 echo -e "\n7. All open ports and services:"

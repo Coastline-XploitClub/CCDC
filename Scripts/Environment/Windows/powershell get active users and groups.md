@@ -1,6 +1,6 @@
 # Powershell Commands
 
-``` powershell
+```powershell
 Get-LocalUser | Where-object -Property Enabled -eq $True
 PS C:\Users\cisne> foreach ($user in $localUsers) {
     Write-Host "User: $($user.Name)"

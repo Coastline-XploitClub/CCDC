@@ -1,20 +1,27 @@
 # kubectl Cheat Sheet
 
 ## Kubectl autocomplete
+
 ### BASH
+
 ```bash
 source <(kubectl completion bash) # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
 echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell.
 ```
+
 You can also use a shorthand alias for kubectl that also works with completion:
+
 ```bash
 alias k=kubectl
 complete -o default -F __start_kubectl k
 ```
+
 ### A note on --all-namespaces
+
 Appending `--all-namespaces` happens frequently enough that you should be aware of the shorthand for `--all-namespaces` which is `kubectl -A`.
 
 ## Kubectl context and configuration
+
 Set which Kubernetes cluster `kubectl` communicates with and modifies configuration information. See Authenticating Across Clusters with kubeconfig documentation for detailed config file information.
 
 ```bash
@@ -57,6 +64,7 @@ alias kn='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 
 ```
 
 ## Kubectl output formatting
+
 ```bash
 kubectl get pods -o yaml                          # output in YAML format, which includes the namespace
 kubectl get pods -o yaml --export                 # export pod details in YAML format without cluster specific information
