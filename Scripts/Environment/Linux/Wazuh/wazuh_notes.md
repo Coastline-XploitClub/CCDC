@@ -140,3 +140,5 @@ use gui to add to /etc/rules...local rules require a decoder, for this example y
 ```
 ## detecting active directory attacks
 “Replicating Directory Changes” and “Replicating Directory Changes All” 
+
+## 

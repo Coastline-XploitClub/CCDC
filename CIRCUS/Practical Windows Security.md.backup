@@ -58,12 +58,7 @@ SysvolPath "C:\Windows\SYSVOL" `
 ```
 - Set DSRM password
 - Disable Windows Defender using gpedit and pushing local computer policy to domain...disable Windows Defender Antivirus
-- Disable Real-Time Protection via Group Policy (otherwise it will turn back on occassionally and block some of our tools)
-```powershell
-Comptuter Configuration / Administrative Templates / Windows Components / Windows Defender Antivirus / Turn off Windows Defender Antivirus "Enabled"
-Comptuter Configuration / Administrative Templates / Windows Components / Windows Defender Antivirus / Real Time Protection / Turn off real time protection "Enabled"
 
-```
 ### Attack Script
 - Install Swift on Security Sysmon configuration via the included script
 [ pwf ](https://github.com/bluecapesecurity/PWF)
@@ -141,20 +136,40 @@ rip -r SOFTWARE -p defender
 attrib
 #remove hidden
 attrib -h <FILENAME>
+#for loop through directory with rip -a
+foreach ($i in gci){rip -a -r $i > $i.txt}
 ```
+
+### user assist
+- applications last opened (in NTUSER.DAT)
 ```powershell
-# this works if rip is on PATH or Set-Aliased, set to only parse archives...I had separate folders for each user so I have to run this in each folder
-foreach ($i in gci -Attributes Archive){rip -r $i -a > "$i.txt"}
+rip -r .\NTUSER.DAT -p userassist
+
+NTUSER\Software\Microsoft\CurrentVersion\Explorer\UserAssist
 ```
-- open all txt files in Notepad++ so we can ctl+F to search
-### User accounts and SIDS
-- [ reference for well known SIDs ](https://learn.microsoft.com/en-us/windows/win32/secauthz/well-known-sids)
-- SAM database holds user accounts and secrets, cannot be viewed while system is running
-- bookmarks, aliases...will reveal Aliases and Users
-- can use "Export" tab at bottom of Users to export as xlsx and Eric Zimmerman's Timeline Explorer to open
--
+### recent Docs
+
+- folders last used (NTUSER.DAT)
 ```powershell
-#well known SIDS are shorter, user SIDs are longer
-#can run regripper command or look in HKLM\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList
-rip -r SOFTWARE -p profilelist
+   rip -r .\NTUSER.DAT -p recentdocs
+```
+Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+### shellbags
+
+Built into Microsoft Windows is the ability for the operating system to track user window viewing preferences specific to Windows Explorer. These are tied
+to the user and can be found in both NTUSER.DAT and USRCLASS.DAT
+NTUSER.DAT:
+HKCU\Software\Microsoft\Windows\Shell\BagMRU
+
+HKCU\Software\Microsoft\Windows\Shell\Bags
+
+USRCLASS.DAT:
+
+Local Settings\Software\Microsoft\Windows\Shell\BagMRU
+Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags
+
+```powershell
+rip -r .\UsrClass.dat -p shellbags
+# or use eric zimmerman shellbags explorer.  This will show folder names as well as dates modified and dates accessed.
+./SBECmd.exe -d C:\Cases\Analysis\Registry\Users\Administrator\ --csv C:\Cases\Analysis\ --csvf administrator_shell_bags.csv
 ```
