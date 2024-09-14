@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Output file for storing new passwords
+OUTPUT_FILE="new_passwords.txt"
+
+# Ensure the output file is empty before we start
+> $OUTPUT_FILE
+
+# Function to generate a random password
+generate_password() {
+    openssl rand -base64 12
+}
+
+# Loop over all non-system users (UID >= 1000) except specific service accounts
+for user in $(awk -F: '($3 >= 1000) && ($1 != "nobody") {print $1}' /etc/passwd); do
+    # Generate a new password
+    new_password=$(generate_password)
+
+    # Change the password for the user
+    echo "$user:$new_password" | chpasswd
+
+    # Log the user and their new password to the output file
+    echo "$user:$new_password" >> $OUTPUT_FILE
+done
+
+# Print the location of the output file
+echo "All user passwords updated. Check $OUTPUT_FILE for new passwords."
