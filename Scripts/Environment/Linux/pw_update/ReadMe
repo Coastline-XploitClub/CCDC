@@ -1,0 +1,11 @@
+follow these steps to run the script:
+
+within terminal, enter:  vim <filename>.sh
+within vim, paste in the body text of UserPWRevisionTxtOutput
+within vim, press esc key, then enter ":wq" to save file and exit vim editor
+back in terminal, enter: chmod +x <filename>.sh
+now run the file, in terminal enter "./<filename>.sh>
+
+all done!
+
+
