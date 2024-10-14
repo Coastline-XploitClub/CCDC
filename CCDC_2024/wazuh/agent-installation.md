@@ -1,3 +1,4 @@
+# it is crucial that the packages downloaded and installed match the version of the wazuh-manager installed!!
 # debian 
 ```bash
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.9.0-1_amd64.deb && sudo WAZUH_MANAGER='<wazuh manager ip' WAZUH_AGENT_NAME='<wazuh agent name>' dpkg -i ./wazuh-agent_4.9.0-1_amd64.deb
