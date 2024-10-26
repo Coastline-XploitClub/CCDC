@@ -6,6 +6,7 @@ within vim, press esc key, then enter ":wq" to save file and exit vim editor
 back in terminal, enter: chmod +x <filename>.sh
 now run the file, in terminal enter "./<filename>.sh>
 
+then to change root, enter "passwd root" followed by desired password.
 all done!
 
 
