@@ -1,0 +1,26 @@
+# Removes any SSH keys for all users, adds a new SSH key for a designated root user.
+---
+- name: Read passwd file
+  ansible.builtin.getent:
+    database: passwd
+
+- name: Get user home directories
+  ansible.builtin.set_fact:
+    users: "{{ getent_passwd.keys()|list }}"
+
+- name: Remove SSH keys for all users
+  ansible.builtin.file:
+    path: "{{ getent_passwd[item][4] }}/.ssh/authorized_keys"
+    state: absent
+  with_items:
+    - "{{users}}"
+
+- name: Add SSH key for root
+  ansible.builtin.copy:
+    src: ssh_pubkey.pub
+    dest: "{{ getent_passwd[item][4] }}/.ssh/authorized_keys"
+    owner: root
+    group: root
+    mode: '0600'
+  with_items:
+    - "{{ ssh_rootuser }}"
