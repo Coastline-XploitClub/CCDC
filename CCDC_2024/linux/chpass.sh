@@ -31,7 +31,7 @@ printHelp() {
 
 DRYRUN="false"
 USEFILE="false"
-USERS=$(cat /etc/passwd | grep sh$ | awk -F':' '{print $1}')  # Get all users from /etc/passwd (Default behavior)
+USERS=$(cat /etc/passwd | grep sh$ | grep -v root | awk -F':' '{print $1}')  # Get all users from /etc/passwd (Default behavior)
 OPTIND=1 # Reset option ID for getopts when running this script multiple times
 while getopts "hsdf:" option; do
    case $option in
@@ -42,7 +42,7 @@ while getopts "hsdf:" option; do
          DRYRUN="true"
          ;;
       s) # Use shadow
-         USERS=$(cat /etc/shadow | grep '^[^:]*:[^\*!]' |awk -F':' '{print $1}')  # Get all users with passwords from /etc/shadow
+         USERS=$(cat /etc/shadow | grep '^[^:]*:[^\*!]' | grep -v root | awk -F':' '{print $1}')  # Get all users with passwords from /etc/shadow
          ;; 
       f) # Use file
          USEFILE="true"
