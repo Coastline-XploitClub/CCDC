@@ -143,6 +143,15 @@ pgrep <SERVICE NAME>
 sudo kill <PID>
 ```
 
+```bash
+# Steps to audit open ports
+# 1. Find open ports
+netstat -tunalp
+#2. Search for the process using the PID in netstat output
+ps -ef --forest | grep <PID>
+#3. Examine the service, where is it running out of? Can I hit it in a browser? Any obvious vulnerabilities?
+```
+
 ### Audit Cronjobs
 
 ```bash
