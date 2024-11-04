@@ -112,12 +112,15 @@ sudo scp -r <SERVICE CONFIG FILES> <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/<
 
 ```bash
 # List all users with shell access '/bin/sh, /bin/bash, /bin/tcsh, /bin/zsh, etc.'
-sudo nano /etc/passwd
-sudo nano /etc/group
+grep sh$ /etc/passwd
+# Check users in sudo group 
+getent group sudo
 # Check that all users have a hash for their password
-sudo nano /etc/shadow
+less /etc/shadow
 # Check which groups have sudo access and lock down to wheel and/or sudo group
-sudo nano /etc/sudoers
+visudo
+# OR
+nano /etc/sudoers
 ```
 
 ### Lock down files and directories
