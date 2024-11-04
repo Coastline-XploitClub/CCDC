@@ -94,18 +94,13 @@ systemctl | more
 systemctl status
 ```
 
-### Make backup directory on local machine
-
+### Make compressed archives on local machine for important files/folders
 ```bash
-mkdir -p ~/backups/<IPADDRES OF REMOTE MACHINE>/
-```
+# On target machine in environment
+tar -czvf <OUTPUT_FILENAME.tar> <TARGET DIRECTORY>
 
-### Scp Option
-
-```bash
-sudo scp -r /boot <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/boot
-sudo scp -r /var/log <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/var/log
-sudo scp -r <SERVICE CONFIG FILES> <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/<SERVICE_NAME>
+# On local machine
+scp -r -i <PRIVATE_KEY_FILE> root@<MACHINE_IP>:<OUTPUT_FILENAME.tar> <LOCAL_DIRECTORY>
 ```
 
 ### Audit users and groups
