@@ -138,6 +138,18 @@ sudo chattr -i -R /etc/pam.d
 ### Audit processes
 
 ```bash
+systemctl list-units --type=service --state=active
+```
+
+```bash
+systemctl status <SERVICE_OF_INTEREST>
+```
+
+```bash
+systemctl cat netbox.service
+```
+
+```bash
 ps aux | grep -i <PROCESS NAME>
 pgrep <SERVICE NAME>
 # Kill service by pid
