@@ -109,7 +109,7 @@ sudo scp -r <SERVICE CONFIG FILES> <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/<
 ```
 ### SFTP Option - pull from target to host
 ```bash
-sftp -i ~path/to/key_file <USERNAME>@<TARGET-IP>
+sftp -i ~/path/to/key_file <USERNAME>@<TARGET-IP>
 ```
 
 ### Audit users and groups
