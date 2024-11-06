@@ -150,6 +150,10 @@ systemctl cat netbox.service
 ```
 
 ```bash
+sudo lsof -i -P -n
+```
+
+```bash
 ps aux | grep -i <PROCESS NAME>
 pgrep <SERVICE NAME>
 # Kill service by pid
