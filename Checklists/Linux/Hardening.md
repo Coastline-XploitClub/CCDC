@@ -107,6 +107,10 @@ sudo scp -r /boot <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/boot
 sudo scp -r /var/log <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/var/log
 sudo scp -r <SERVICE CONFIG FILES> <USERNAME>@<LOCAL-IP>:~/backups/<IPADDRESS>/<SERVICE_NAME>
 ```
+### SFTP Option - pull from target to host
+```bash
+sftp -i ~path/to/key_file <USERNAME>@<TARGET-IP>
+```
 
 ### Audit users and groups
 
