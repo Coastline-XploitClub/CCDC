@@ -1,7 +1,7 @@
 ---
 - name: Import Python bootstrap task
   import_tasks: bootstrap.yaml
-  when: rotate_pubkey == false
+  when: bootstrap == true
   
 - name: Import auditd task
   import_tasks: auditd.yaml
