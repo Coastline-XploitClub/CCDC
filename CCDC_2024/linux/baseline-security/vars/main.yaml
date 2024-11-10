@@ -8,7 +8,8 @@ ssh_rootuser: root
 #   false
 rotate_pubkey: false
 
-
+# Install Python on all systems
+bootstrap: false
 
 
 ############################
