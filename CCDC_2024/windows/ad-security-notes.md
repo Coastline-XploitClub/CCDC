@@ -1,3 +1,12 @@
+## cred man
+```cmd
+rundll32.exe keymgr.dll, KRShowKeyMgr
+vaultcmd /list
+VaultCmd /listproperties:"VaultName"
+VaultCmd /listcreds:"VaultName"
+```
+
+
 ## Kerberos
 # Kerberos Auditing Group Policy
 GPMC / Computer Configuration / Policies / Windows Settings / Advanced Audit Policy Configuration / Audit Policies / Account Logon
