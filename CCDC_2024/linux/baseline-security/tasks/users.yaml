@@ -26,3 +26,14 @@
     owner: "{{ admin_user }}" 
     group: "{{ admin_user }}"
     mode: '0600'
+
+- name: Does bash exist?
+  ansible.builtin.stat:
+    path: /bin/bash
+  register: bash_exists
+
+- name: Change to bash shell
+  ansible.builtin.user:
+    name: ccdcadmin
+    shell: /bin/bash
+  when: bash_exists
