@@ -23,6 +23,6 @@
 
 - name: Restart auditd and enable
   ansible.builtin.service:
-    name: httpd
+    name: auditd 
     state: restarted
     enabled: true
