@@ -1,6 +1,5 @@
 # Superuser that has SSH login permitted
-#   When in doubt, keep at default "root"
-ssh_rootuser: root
+admin_user: ccdcadmin
 
 # Skip all tasks and reupload the SSH public key only
 # Accepted values:

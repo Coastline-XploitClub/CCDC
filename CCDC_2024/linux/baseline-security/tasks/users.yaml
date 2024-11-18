@@ -14,13 +14,25 @@
     state: absent
   with_items:
     - "{{users}}"
+  
+- name: Create admin user
+  ansible.builtin.user:
+    name: "{{ admin_user }}"
+    state: present
+    create_home: yes
 
-- name: Add SSH key for root
+- name: Add admin to sudoers
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    regexp: '^{{ admin_user }}'
+    line: '{{ admin_user }} ALL=(ALL) NOPASSWD: ALL'
+    state: present
+    validate: 'visudo -cf %s'
+
+- name: Add SSH key for admin user
   ansible.builtin.copy:
     src: ssh_pubkey.pub
-    dest: "{{ getent_passwd[item][4] }}/.ssh/authorized_keys"
-    owner: root
-    group: root
+    dest: "{{ admin_user }}/.ssh/authorized_keys"
+    owner: "{{ admin_user }}" 
+    group: "{{ admin_user }}"
     mode: '0600'
-  with_items:
-    - "{{ ssh_rootuser }}"
