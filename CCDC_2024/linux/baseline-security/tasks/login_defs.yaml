@@ -5,7 +5,6 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
-    validate: 'sshd -t -f %s'
   with_items:
     - regexp: "^ENCRYPT_METHOD"
       line: "ENCRYPT_METHOD    SHA512"  # Use SHA512 to hash passwords

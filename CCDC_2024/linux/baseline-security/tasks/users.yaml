@@ -1,20 +1,5 @@
 # Removes any SSH keys for all users, adds a new SSH key for a designated root user.
 ---
-- name: Read passwd file
-  ansible.builtin.getent:
-    database: passwd
-
-- name: Get user home directories
-  ansible.builtin.set_fact:
-    users: "{{ getent_passwd.keys()|list }}"
-
-- name: Remove SSH keys for all users
-  ansible.builtin.file:
-    path: "{{ getent_passwd[item][4] }}/.ssh/authorized_keys"
-    state: absent
-  with_items:
-    - "{{users}}"
-  
 - name: Create admin user
   ansible.builtin.user:
     name: "{{ admin_user }}"
@@ -29,10 +14,15 @@
     state: present
     validate: 'visudo -cf %s'
 
+- name: Create .ssh directory
+  ansible.builtin.file:
+    path: "/home/{{ admin_user }}/.ssh"
+    state: directory
+
 - name: Add SSH key for admin user
   ansible.builtin.copy:
     src: ssh_pubkey.pub
-    dest: "{{ admin_user }}/.ssh/authorized_keys"
+    dest: "/home/{{ admin_user }}/.ssh/authorized_keys"
     owner: "{{ admin_user }}" 
     group: "{{ admin_user }}"
     mode: '0600'
