@@ -18,5 +18,5 @@
     - regexp: "^LOG_OK_LOGINS"
       line: "LOG_OK_LOGINS     yes" # Log successful logins
     - regexp: "^LOG_UNKFAIL_ENAB"
-      line: "LOG_UNKFAIL_ENAB     no" # Disable display of unknown usernames in log
+      line: "LOG_UNKFAIL_ENAB     yes" # Enable display of unknown usernames in log (for visibility)
   notify: Restart ssh   # This handler runs only if change made
