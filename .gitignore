@@ -1,4 +1,3 @@
 CCDC_2024/linux/baseline-security/files/ssh_pubkey.pub
-CCDC_2024/linux/baseline-security/inventory
-CCDC_2024/linux/baseline-security/playbook.yaml
-
+CCDC_2024/linux/inventory
+CCDC_2024/linux/playbook.yaml
