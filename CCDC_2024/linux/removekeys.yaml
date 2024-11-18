@@ -16,4 +16,4 @@
         state: absent
       with_items:
         - "{{users}}"
-      when: getent_passwd[item][4] != "ccdcadmin" 
+      when: getent_passwd[item][4] != "/home/ccdcadmin" 
