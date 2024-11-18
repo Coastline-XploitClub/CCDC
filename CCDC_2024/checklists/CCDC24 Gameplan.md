@@ -23,7 +23,7 @@ This is a **rough guide**. If there is anything that you should take the time to
 ## Linux team
 1. Wait for the Ansible script to run (a designated team member will be in charge of this)
 2. Log into your designated Linux box(es)
-3. Perform [enumeration](https://github.com/Coastline-XploitClub/CCDC/blob/main/Checklists/CCDC'23%20Checklists/Checklist.md). **Take notes as you go of important information.**
+3. Perform [enumeration](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/checklists/first-steps.md). **Take notes as you go of important information. Share this info with teammates.**
 - Listening ports: `netstat -tulpn`
 - Running processes: `ps ef`, can also grep for a PID
 - Users with elevated permissions: `/etc/sudoers` and `/etc/sudoers.d`
@@ -34,5 +34,10 @@ This is a **rough guide**. If there is anything that you should take the time to
 > ℹ️ This list only scratches the surface. Investigate running webservers, figure out how hosted services work, what they do, if they are a scored service, etc. **Google and online documentation are key.**
 4. Run the [password change script](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/linux/chpass.sh)
 5. Move the password .csv file to your personal computer, then remove it from the system or lock down its privileges
+6. Create initial [backups](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/checklists/basic-linux-hardening.md#make-compressed-archives-on-local-machine-for-important-filesfolders) if you know what configs are important
 
 ## Windows team
+
+# Throughout the day
+- Continue to make backups as necessary
+- Note important changes/progress on whiteboard
