@@ -1,3 +1,4 @@
+# Installs and configures auditd
 ---
 - name: Install auditd package | Debian/Ubuntu
   ansible.builtin.package:

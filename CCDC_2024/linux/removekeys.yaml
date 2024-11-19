@@ -1,5 +1,7 @@
+# Removes keys for all users that are not the designated admin user
+# REMEMBER TO SET THE RIGHT ADMIN USER TO PREVENT LOCKOUT!
 ---
-- hosts: vanilla_linux
+- hosts: linux 
   become: true
   tasks:
     - name: Read passwd file
@@ -16,4 +18,4 @@
         state: absent
       with_items:
         - "{{users}}"
-      when: getent_passwd[item][4] != "/home/ccdcadmin" 
+      when: getent_passwd[item][4] != "/home/ccdcadmin"  # CHANGE ME IF NEEDED!

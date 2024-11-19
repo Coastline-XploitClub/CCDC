@@ -1,5 +1,5 @@
 # Taken from dev-sec/ansible-collection-hardening
-
+# Hardens permissions on crontabs
 - name: Find system crontabs/dirs
   ansible.builtin.find:
     paths:

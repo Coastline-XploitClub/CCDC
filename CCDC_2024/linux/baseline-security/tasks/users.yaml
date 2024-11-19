@@ -1,4 +1,4 @@
-# Removes any SSH keys for all users, adds a new SSH key for a designated root user.
+# Adds a new SSH key for a designated root user.
 ---
 - name: Create admin user
   ansible.builtin.user:
