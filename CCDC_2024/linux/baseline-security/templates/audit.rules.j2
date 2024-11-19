@@ -8,6 +8,7 @@
 # /etc/audit/audit.rules
 #
 # Compiled by Florian Roth
+# Modified my Marcel Truong-Chun
 #
 # Created  : 2017/12/05
 # Modified : 2023/01/25
@@ -96,32 +97,6 @@
 
 -a never,exit -F arch=b32 -F dir=/var/lock/lvm/ -F key=locklvm
 -a never,exit -F arch=b64 -F dir=/var/lock/lvm/ -F key=locklvm
-
-## Filebeat 
-### https://www.elastic.co/guide/en/beats/filebeat/current/directory-layout.html
-
--a never,exit -F arch=b32 -F path=/opt/filebeat -F perm=wa -F key=filebeat
--a never,exit -F arch=b64 -F path=/opt/filebeat -F perm=wa -F key=filebeat
-
--a always,exit -F arch=b32 -F dir=/etc/filebeat/ -F perm=wa -F key=filebeat
--a always,exit -F arch=b64 -F dir=/etc/filebeat/ -F perm=wa -F key=filebeat
-
--a always,exit -F arch=b32 -F dir=/usr/share/filebeat/ -F perm=wa -F key=filebeat
--a always,exit -F arch=b64 -F dir=/usr/share/filebeat/ -F perm=wa -F key=filebeat
-
--a always,exit -F arch=b64 -F dir=/usr/share/filebeat/bin/ -F perm=x -F key=filebeat
--a always,exit -F arch=b32 -F dir=/usr/share/filebeat/bin/ -F perm=x -F key=filebeat
-
-### macOS
-#### https://www.elastic.co/guide/en/beats/filebeat/7.17/directory-layout.html
--a always,exit -F arch=b32 -F path=/usr/local/var/homebrew/linked/filebeat-full -F perm=x -F key=filebeat
--a always,exit -F arch=b64 -F path=/usr/local/var/homebrew/linked/filebeat-full -F perm=x -F key=filebeat
-
--a always,exit -F arch=b32 -F dir=/usr/local/var/homebrew/linked/filebeat-full/bin/ -F perm=x -F key=filebeat 
--a always,exit -F arch=b64 -F dir=/usr/local/var/homebrew/linked/filebeat-full/bin/ -F perm=x -F key=filebeat
-
--a always,exit -F arch=b32 -F dir=/usr/local/etc/filebeat/ -F perm=wa -F key=filebeat  
--a always,exit -F arch=b64 -F dir=/usr/local/etc/filebeat/ -F perm=wa -F key=filebeat
 
 ## More information on how to filter events
 ### https://access.redhat.com/solutions/2482221
@@ -265,6 +240,7 @@
 
 ## root ssh key tampering
 -w /root/.ssh -p wa -k rootkey
+-w /{{ admin_user }}/.ssh -p wa -k rootkey
 
 # Systemd
 -w /bin/systemctl -p x -k systemd
@@ -442,11 +418,6 @@
 
 -a always,exit -F arch=b32 -F path=/usr/sbin/gzexe -F perm=x -F key=Data_Compressed
 -a always,exit -F arch=b64 -F path=/usr/sbin/gzexe -F perm=x -F key=Data_Compressed
-
-### macOS
-
--a always,exit -F arch=b32 -F path=/usr/local/bin/gzexe -F perm=x -F key=Data_Compressed
--a always,exit -F arch=b64 -F path=/usr/local/bin/gzexe -F perm=x -F key=Data_Compressed
 
 ### https://www.rkeene.org/oss/dact
 -a always,exit -F arch=b32 -F path=/usr/bin/dact -F perm=x -F key=Data_Compressed
@@ -633,10 +604,6 @@
 ## GDS specific secrets
 -w /etc/puppet/ssl -p wa -k puppet_ssl
 
-## IBM Bigfix BESClient
--a always,exit -F arch=b64 -S open -F dir=/opt/BESClient -F success=0 -k soft_besclient
--w /var/opt/BESClient/ -p wa -k soft_besclient
-
 ## CHEF https://www.chef.io/chef/
 -w /etc/chef -p wa -k soft_chef
 
@@ -776,7 +743,7 @@
 -a always,exit -F arch=b64 -S shmget -k Inter-Process_Communication
 
 # High Volume Events ----------------------------------------------------------
-
+{% if auditd_highvolumeevents == true %}
 ## Disable these rules if they create too many events in your environment
 
 ## Common Shells
@@ -812,7 +779,7 @@
 ### because this might be a sign of someone exploiting a hole in the 32
 ### bit API.
 -a always,exit -F arch=b32 -S all -k 32bit_api
-
+{% endif %}
 # Make The Configuration Immutable --------------------------------------------
 
 ##-e 2

@@ -10,6 +10,8 @@ rotate_pubkey: false
 # Install Python on all systems
 bootstrap: false
 
+# Enable logging high-volume events in auditd
+auditd_highvolumeevents: false
 
 ############################
 ###   ADVANCED OPTIONS   ###
