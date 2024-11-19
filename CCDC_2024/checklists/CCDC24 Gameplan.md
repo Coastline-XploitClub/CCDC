@@ -14,7 +14,7 @@ Ensure the following is configured on your personal computer:
 
 Ensure that you know the following:
 - [ ] IP address range for the competition environment
-- [ ] The designated admin username we will use
+- [ ] The designated admin username we will use (`ccdcadmin`)
 
 
 # Competition start
@@ -31,13 +31,21 @@ This is a **rough guide**. If there is anything that you should take the time to
 - Crontabs (under `/etc/` and `/var/spool/cron/crontabs`)
 - PAM configurations: `/usr/share/pam/configs`
 - SUID/SGID checks: `sudo find / -perm -4000 -type f 2>/dev/null` (SUID), `sudo find / -perm -2000 -type f 2>/dev/null` (SGID)
-> ℹ️ This list only scratches the surface. Investigate running webservers, figure out how hosted services work, what they do, if they are a scored service, etc. **Google and online documentation are key.**
+> ℹ This list only scratches the surface. Investigate running webservers, figure out how hosted services work, what they do, if they are a scored service, etc. **Google and online documentation are key.**
 4. Run the [password change script](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/linux/chpass.sh)
 5. Move the password .csv file to your personal computer, then remove it from the system or lock down its privileges
 6. Create initial [backups](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/checklists/basic-linux-hardening.md#make-compressed-archives-on-local-machine-for-important-filesfolders) if you know what configs are important
 
 ## Windows team
+1. Identify if your computer is a domain controller.
+- If it is, run the [AD password change script](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/windows/Change-ADPasswordsCSV.ps1)
+2. Perform enumeration
+- [Resource 1](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/roles.md)
+- [Resource 2](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/checklists/first-steps.md)
+> ℹ️ These lists only scratch the surface. Investigate running webservers, figure out how hosted services work, what they do, if they are a scored service, etc. **Google and online documentation are key.**
+3. Create initial [backups](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/windows/active-directory-backups.md), along with important configurations
 
 # Throughout the day
 - Continue to make backups as necessary
 - Note important changes/progress on whiteboard
+- Monitor logs for system and services for red team actions
