@@ -13,21 +13,8 @@
 # Created  : 2017/12/05
 # Modified : 2023/01/25
 #
-# Based on rules published here:
-#   Gov.uk auditd rules
-#   	https://github.com/gds-operations/puppet-auditd/pull/1
-# 	CentOS 7 hardening
-# 		https://highon.coffee/blog/security-harden-centos-7/#auditd---audit-daemon
-# 	Linux audit repo
-# 		https://github.com/linux-audit/audit-userspace/tree/master/rules
-# 	Auditd high performance linux auditing
-# 		https://linux-audit.com/tuning-auditd-high-performance-linux-auditing/
-#
-# Further rules
-# 	For PCI DSS compliance see:
-# 		https://github.com/linux-audit/audit-userspace/blob/master/rules/30-pci-dss-v31.rules
-# 	For NISPOM compliance see:
-# 		https://github.com/linux-audit/audit-userspace/blob/master/rules/30-nispom.rules
+# Configured to monitor `ccdcadmin` user's ssh keys
+# Does not include high volume events
 
 # Remove any existing rules
 -D
@@ -240,7 +227,7 @@
 
 ## root ssh key tampering
 -w /root/.ssh -p wa -k rootkey
--w /home/{{ admin_user }}/.ssh -p wa -k rootkey
+-w /home/ccdcadmin/.ssh -p wa -k rootkey
 
 # Systemd
 -w /bin/systemctl -p x -k systemd
@@ -743,43 +730,7 @@
 -a always,exit -F arch=b64 -S shmget -k Inter-Process_Communication
 
 # High Volume Events ----------------------------------------------------------
-{% if auditd_highvolumeevents == true %}
-## Disable these rules if they create too many events in your environment
 
-## Common Shells
--w /bin/bash -p x -k susp_shell
--w /bin/dash -p x -k susp_shell
--w /bin/busybox -p x -k susp_shell
--w /bin/zsh -p x -k susp_shell
--w /bin/sh -p x -k susp_shell
--w /bin/ksh -p x -k susp_shell
-
-## Root command executions
--a always,exit -F arch=b64 -F euid=0 -F auid>=1000 -F auid!=-1 -S execve -k rootcmd
-
-## File Deletion Events by User
--a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=-1 -k delete
-
-## File Access
-### Unauthorized Access (unsuccessful)
--a always,exit -F arch=b64 -S creat -S open -S openat -S open_by_handle_at -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k file_access
--a always,exit -F arch=b64 -S creat -S open -S openat -S open_by_handle_at -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k file_access
-
-### Unsuccessful Creation
--a always,exit -F arch=b64 -S mkdir,creat,link,symlink,mknod,mknodat,linkat,symlinkat -F exit=-EACCES -k file_creation
--a always,exit -F arch=b64 -S mkdir,link,symlink,mkdirat -F exit=-EPERM -k file_creation
-
-### Unsuccessful Modification
--a always,exit -F arch=b64 -S rename -S renameat -S truncate -S chmod -S setxattr -S lsetxattr -S removexattr -S lremovexattr -F exit=-EACCES -k file_modification
--a always,exit -F arch=b64 -S rename -S renameat -S truncate -S chmod -S setxattr -S lsetxattr -S removexattr -S lremovexattr -F exit=-EPERM -k file_modification
-
-## 32bit API Exploitation
-### If you are on a 64 bit platform, everything _should_ be running
-### in 64 bit mode. This rule will detect any use of the 32 bit syscalls
-### because this might be a sign of someone exploiting a hole in the 32
-### bit API.
--a always,exit -F arch=b32 -S all -k 32bit_api
-{% endif %}
 # Make The Configuration Immutable --------------------------------------------
 
 ##-e 2

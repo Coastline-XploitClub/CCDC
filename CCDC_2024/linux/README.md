@@ -9,10 +9,14 @@ Each auditd rule has a tag to identify categories of suspicious behavior.
 Usage:
 ```
 # Searching by event name
-ausearch -k <event_name> -i
+ausearch -i -k <event_name>
 
 # Searching by parent process
-ausearch -pp <PID>
+ausearch -i -pp <PPID>
+
+# Correlating with running processes
+ps ef | grep <PPID>
+ps ef --forest
 
 # Summary of all events
 aureport --summary
@@ -25,10 +29,7 @@ cat /var/log/audit/audit.log
 
 > 🛑 These events most likely require investigation
 
-**`auditlog`**
-- Attempts to change the auditd settings
-
-**`etcgroup`, `etcpasswd`, `opasswd`, `group_modification`, `passwd_modification`,, `user_modification`**
+**`etcgroup`, `etcpasswd`, `opasswd`, `group_modification`, `passwd_modification`, `user_modification`**
 - Modifying group, passwd, gshadow, shadow, or /etc/security/opasswd files
 - Using passwd command
 - Using and user modification commands
@@ -47,6 +48,7 @@ cat /var/log/audit/audit.log
 
 **`recon`**
 - Common reconnaissance commands (ex. whoami)
+- Some `id` commands may be false positives--check PPID in `ps`
 
 **`susp_activity`**
 - Suspicious activity (ex. netcat, nmap, wireshark)
@@ -100,6 +102,9 @@ cat /var/log/audit/audit.log
 ### Other events
 
 > ℹ️ These events may be false positives, use judgement to determine if they warrant investigation
+
+**`auditlog`**
+- Attempts to change the auditd settings
 
 **`audittools`**
 - Attempts to read/access auditd logs/trails
