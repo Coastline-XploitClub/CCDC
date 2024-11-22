@@ -41,7 +41,13 @@ This is a **rough guide**. If there is anything that you should take the time to
 - If it is, run the [AD password change script](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/windows/Change-ADPasswordsCSV.ps1)
 2. **Create OU for Windows Servers we will be managing with Group Policy**
 3. Create domain admin accounts for each Windows team member. [script](CCDC_2024/windows/Add-DomainAdmins.ps1)
+> ⚠️ REMEMBER TO DELETE THE SCRIPT WHEN DONE
+
+> ⚠️ LOGON AND CHANGE PASSWORD TO SOMETHING YOU WILL REMEMBER
 4. Create local administrator accounts for each team member on each domain computer.   [script](CCDC_2024/windows/Add-LocalAdmin.ps1) Script uses ./Add-LocalAdmin.ps1 'OU' with the OU as the one created for domain computers
+> ⚠️ REMEMBER TO DELETE THE SCRIPT WHEN DONE
+
+> ⚠️ LOGON AND CHANGE PASSWORD TO SOMETHING YOU WILL REMEMBER, even better if local admin passwords are different for each account on each box
 5. Enable Powershell, Logon and Remote Desktop logging via separate group policies for Domain Controller and Domain Computers
 - LOGONS: Computer Configuration/Policies/Windows Settings/Security Settings/Advanced Audit/Audit Other Logon/Logoff Events **logging for success is in Security and Terminal Services Operational**
 - POWERSHELL Computer Configuration/Policies/Windows Components/ Windows Powershell 
