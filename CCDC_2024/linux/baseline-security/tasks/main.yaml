@@ -32,5 +32,5 @@
 
 - name: Import sshd task
   import_tasks: sshd.yaml
-  when: rotate_pubkey == false
+  when: (rotate_pubkey == false) and (harden_ssh == true)
 

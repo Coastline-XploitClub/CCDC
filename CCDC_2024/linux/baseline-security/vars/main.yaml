@@ -2,10 +2,10 @@
 admin_user: ccdcadmin
 
 # Skip all tasks and reupload the SSH public key only
-# Accepted values:
-#   true
-#   false
 rotate_pubkey: false
+
+# Disable password auth and root login on SSH (true), or skip (false)
+harden_ssh: true
 
 # Install Python on all systems
 bootstrap: false
