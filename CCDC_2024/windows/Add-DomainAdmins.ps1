@@ -13,7 +13,7 @@ foreach ($name in $Names) {
         # Add to Domain Admins group
         Add-ADGroupMember -Identity 'Domain Admins' -Members $samacct -ErrorAction Stop
 
-        Write-Output "User ${samacct} created and added to Domain Admins successfully."
+        Write-Output "User ${samacct} created and added to Domain Admins successfully. Log in to DC and CHANGE YOUR PASSWORD NOW!"
     }
     catch {
         Write-Output "Failed to create user ${samacct}: $_"
