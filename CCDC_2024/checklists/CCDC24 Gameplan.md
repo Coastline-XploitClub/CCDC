@@ -39,11 +39,25 @@ This is a **rough guide**. If there is anything that you should take the time to
 ## Windows team
 1. Identify if your computer is a domain controller.
 - If it is, run the [AD password change script](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/windows/Change-ADPasswordsCSV.ps1)
-2. Perform enumeration
+2. **Create OU for Windows Servers we will be managing with Group Policy**
+3. Create domain admin accounts for each Windows team member. [script](CCDC_2024/windows/Add-DomainAdmins.ps1)
+4. Create local administrator accounts for each team member on each domain computer.   [script](CCDC_2024/windows/Add-LocalAdmin.ps1) Script uses ./Add-LocalAdmin.ps1 'OU' with the OU as the one created for domain computers
+5. Enable Powershell, Logon and Remote Desktop logging via separate group policies for Domain Controller and Domain Computers
+- LOGONS: Computer Configuration/Policies/Windows Settings/Security Settings/Advanced Audit/Audit Other Logon/Logoff Events **logging for success is in Security and Terminal Services Operational**
+- POWERSHELL Computer Configuration/Policies/Windows Components/ Windows Powershell 
+6. Restrict remote desktop/local login for Domain Administrators on **Domain Computers** via Group Policy 
+  - Create GP object in Computer Configuration/Policies/Windows Settings/Security Settings/Local Policies/User Rights Assignment/Deny Log on through Remote desktop services and Deny log on locally --> pick Domain Admins group )
+7. If not scored, use firewalls to only allow RDP and WinRM only from our IPs (it is in SCOPE)...preferably set group policy
+8. Install Sysmon on each machine [link](https://download.sysinternals.com/files/Sysmon.zip) with SWIFT ON SECURITY config [link](https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/refs/heads/master/sysmonconfig-export.xml)
+   ```powershell
+   ./sysmon.exe -i sysmonconfig-export.xml -accepteula
+   ```
+9. Run ping castle if possible (needs .NET 4 so we'll see) [link](•	https://github.com/netwrix/pingcastle/releases/download/3.3.0.1/PingCastle_3.3.0.1.zip)
+10. Perform enumeration
 - [Resource 1](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/roles.md)
 - [Resource 2](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/checklists/first-steps.md)
 > ℹ️ These lists only scratch the surface. Investigate running webservers, figure out how hosted services work, what they do, if they are a scored service, etc. **Google and online documentation are key.**
-3. Create initial [backups](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/windows/active-directory-backups.md), along with important configurations
+11. Create initial [backups](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/windows/active-directory-backups.md), along with important configurations
 
 # Throughout the day
 - Continue to make backups as necessary
