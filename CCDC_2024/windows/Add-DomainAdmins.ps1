@@ -2,7 +2,7 @@
 $password = ConvertTo-SecureString -AsPlainText -Force '#!C0@stCCDCteam!' 
 
 # Array of names
-$Names = @('kyle','ceasar', 'cam', 'marshall')
+$Names = @('cesar', 'cam')
 
 foreach ($name in $Names) {
     try {
