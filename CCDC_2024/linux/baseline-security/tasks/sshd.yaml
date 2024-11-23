@@ -1,5 +1,18 @@
 ---
-- name: Disable password authentication and root login
+- name: Disable root login
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    validate: 'sshd -t -f %s'
+  with_items:
+    - regexp: "^PermitRootLogin"
+      line: "PermitRootLogin no"
+  notify: Restart ssh   # This handler runs only if change made
+  when: disable_root == true
+
+- name: Disable password authentication
   ansible.builtin.lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "{{ item.regexp }}"
@@ -9,8 +22,5 @@
   with_items:
     - regexp: "^PasswordAuthentication"
       line: "PasswordAuthentication no"
-    - regexp: "^PermitRootLogin"
-      line: "PermitRootLogin no"
   notify: Restart ssh   # This handler runs only if change made
-
-  
+  when: disable_password == true

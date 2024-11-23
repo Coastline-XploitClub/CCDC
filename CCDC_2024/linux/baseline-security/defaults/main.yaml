@@ -5,7 +5,9 @@ admin_user: ccdcadmin
 rotate_pubkey: false
 
 # Disable password auth and root login on SSH (true), or skip (false)
-harden_ssh: true
+disable_root: true
+disable_password: true
+
 
 # Install Python on all systems
 bootstrap: false
