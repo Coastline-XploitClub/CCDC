@@ -105,7 +105,9 @@ Identify where sensitive data is stored.
 ## Scheduled Tasks/Cron Jobs
 
 Review for any unusual or unauthorized tasks. (Windows: `schtasks`, Linux: `crontab -l`)
-
+```cmd
+schtasks /query /fo CSV > "$(hostname)_schtasks.csv"
+```
 ---
 
 ## Firewall Rules
@@ -124,5 +126,6 @@ netsh advfirewall firewall show rule name=all
 ## Patch Management
 
 Record recent patches and pending updates. (Windows: `wmic qfe list`, Linux: `apt list --upgradable`)
+TODO: add instructions on wusa.exe commands to update from downloaded patch files
 
 ---
