@@ -17,7 +17,7 @@ ipconfig /all > "$(hostname)_ipconfig.txt"
 ## system info local and remote
 ```cmd
 #local
-systeminfo >> "$(hostname)_systeminfo.txt"
+systeminfo > "$(hostname)_systeminfo.txt"
 #remote
 systeminfo /S <computer name or ip> >> <computername>_systeminfo.txt
 ```
@@ -102,6 +102,10 @@ List all software, including versions. (Windows: `wmic product get name,version`
 ## Running Services
 ```powershell
 Get-Service | ? {$_.Status -eq "Running"} | Export-Csv "$(hostname)_running_services.csv"
+```
+- cmd services started
+```cmd
+net start > "$(hostname)_running_services.txt"
 ```
 ---
 
