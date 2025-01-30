@@ -99,6 +99,11 @@ Get-NetTcpConnection | ? {$_.State -eq "Listen"} | Select LocalAddress,LocalPort
 List all software, including versions. (Windows: `wmic product get name,version`, Linux: `dpkg -l`)
 
 ---
+## Running Services
+```powershell
+Get-Service | ? {$_.Status -eq "Running"} | Export-Csv "$(hostname)_running_services.csv"
+```
+---
 
 ## Critical Data Locations
 
