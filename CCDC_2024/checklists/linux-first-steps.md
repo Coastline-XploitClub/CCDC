@@ -90,7 +90,7 @@ ls /etc/crontab  # System crontabs
 
 ---
 
-# Firewall rules
+## Firewall rules
 ### Document all firewall rules (if a firewall is installed)
 ```bash
 iptables -L -v -n
@@ -130,5 +130,9 @@ systemctl start auditd
 systemctl status auditd
 ```
 - For more information on how to view the custom rule alerts, see [this quick guide](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/linux/README.md#reading-auditd-logs)
+
+### Find and remove unnecessary SSH keys
+⚠️ Ensure SSH is not a scored service first. If so, does it score based on SSH key auth? Check logs.
+- SSH keys are stored in a file in the user's home directory (ex. `/home/user/.ssh/authorized_keys` or `/root/.ssh/authorized_keys`). Delete it if unnecessary.
 
 ---
