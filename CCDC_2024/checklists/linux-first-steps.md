@@ -107,12 +107,12 @@ tar -czvf <BACKUP_NAME>.tar.gz /path/to/directory  # backups a directory
 - Examples of interesting directories: `/var/log` (logs), crontabs (see "Cron jobs" above), and other files found
 
 ### Copy backup files to your local machine
-```
+```bash
 scp root@<IP>:<path/to/backup> <path/on/your/computer>  # Backs up to your computer. Run on your computer!
 ```
 
 ### Install the audit daemon
-```
+```bash
 apt install auditd audispd-plugins curl  # Ubuntu/Debian
 yum install audit audit-libs  # CentOS
 pacman -S audit  # Arch Linux
@@ -129,6 +129,6 @@ systemctl enable auditd
 systemctl start auditd
 systemctl status auditd
 ```
-- For more information on how to view the custom rule alerts, see [this quick guide](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/linux/README.md)
+- For more information on how to view the custom rule alerts, see [this quick guide](https://github.com/Coastline-XploitClub/CCDC/blob/main/CCDC_2024/linux/README.md#reading-auditd-logs)
 
 ---
