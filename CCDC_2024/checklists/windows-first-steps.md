@@ -36,7 +36,7 @@ Get-ADUser -Filter * | select SamAccountName,SID,Enabled,PasswordNotRequired,Doe
 ```
 ### no AD module Domain Users
 ```cmd
-net user /domain
+net user /domain > "$(hostname)_domain_users.txt"
 ```
 ### powershell 3+ local users
 ```powershell
