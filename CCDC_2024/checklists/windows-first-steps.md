@@ -14,7 +14,7 @@ ipconfig /all > "$(hostname)_ipconfig.txt"
 ```
 - [] Record the name of each machine. (Windows: `hostname`, Linux: `hostname`)
 - [] Document the operating system. (Windows: `systeminfo`, Linux `cat /etc/os-release` OR `lsb_release -a`)
-## single computer 
+## system info local and remote
 ```cmd
 #local
 systeminfo >> "$(hostname)_systeminfo.txt"
