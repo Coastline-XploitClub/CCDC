@@ -53,6 +53,7 @@ net user
 ```powershell
 Get-ADGroup -Filter * | select Name, @{name="members";expression={(Get-ADGroupMember -Identity $_.Name).Name}} | Export-CSV domain_groups.csv
 ```
+# todo add net user version of ad group command
 - get local groups and members
 ```powershell
 Get-LocalGroup | select Name,@{name="GroupMembers";expression={Get-LocalGroupMember -Name $_.Name}} | Export-CSV "$(hostname)_groups_and_members.csv"
