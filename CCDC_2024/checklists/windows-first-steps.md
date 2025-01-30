@@ -32,7 +32,7 @@ foreach($computer in $computers){systeminfo /S $computer.Name >> domain_computer
 - [] Save a list of all user accounts, including service accounts. (Windows: `net users`, Linux: `cat /etc/passwd`)
 ### Powershell AD Domain Users
 ```powershell
-Get-ADUser -Filter * | select SamAccountName,SID,Enabled,PasswordNotRequired,DoesNotRequirePreAuth,AllowReversiblePasswordEncryption | Export-CSV domain_users.csv
+Get-ADUser -Filter * | select SamAccountName,SID,Enabled,PasswordNotRequired,DoesNotRequirePreAuth,AllowReversiblePasswordEncryption | Export-CSV "$(hostname)_domain_users.csv"
 ```
 ### no AD module Domain Users
 ```cmd
