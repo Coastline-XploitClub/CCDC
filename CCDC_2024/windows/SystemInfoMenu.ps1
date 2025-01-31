@@ -170,7 +170,7 @@ Do {
     Switch ($Choice) {
         
         "1" { Save-AllData }
-		"2" { Show-SystemInfo | Write-Host }
+	"2" { Show-SystemInfo | Write-Host }
         "3" { Show-NetworkInterfaces | Write-Host }
         "4" { Show-OpenPorts | Write-Host }
         "5" { Show-Services | Write-Host }
