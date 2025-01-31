@@ -62,12 +62,33 @@ Function Show-SoftwareInstalled {
     return Get-WmiObject -Class Win32_Product | Select-Object Name, Version | Format-Table -AutoSize | Out-String
 }
 
-# Function to display user and account information
+# Function to display user and account information with extended details
 function Show-UserAccounts {
     Write-Host "\n================= User and Account Information =================" -ForegroundColor Cyan
-    return (net user | Out-String) + "\n" + (net localgroup | Out-String) + "\n" + (net accounts | Out-String)
+    
+    $users = net user | Out-String
+    $groups = net localgroup | Out-String
+    $accounts = net accounts | Out-String
+    
+    Write-Host "$users"
+    Write-Host "$groups"
+    Write-Host "$accounts"
+    
+    Write-Host "\n[+] Listing user account details:" -ForegroundColor Yellow
+    $userDetails = Get-WmiObject Win32_UserAccount | Select-Object Name, FullName, Disabled, PasswordRequired, Lockout, PasswordExpires, LocalAccount, Description | Format-Table -AutoSize | Out-String
+    Write-Host "$userDetails"
+    
+    Write-Host "\n[+] Listing all local groups and their members:" -ForegroundColor Yellow
+    $groupMemberships = Get-LocalGroup | ForEach-Object {
+        $groupName = $_.Name
+        $members = Get-LocalGroupMember -Group $groupName | Select-Object Name, ObjectClass | Format-Table -AutoSize | Out-String
+        "Group: $groupName\n$members"
+    } | Out-String
+    Write-Host "$groupMemberships"
+    
+    Write-Host "===========================================================\n" -ForegroundColor Cyan
+    return "$users\n$groups\n$accounts\n$userDetails\n$groupMemberships"
 }
-
 # Function to display scheduled tasks
 function Show-ScheduledTasks {
     Write-Host "\n================= Scheduled Tasks =================" -ForegroundColor Cyan
@@ -151,13 +172,13 @@ Function Save-AllData {
     Show-NetworkInterfaces | Out-File "$checklistPath\$(hostname)_NetworkInterfaces.txt"
     Show-OpenPorts | Out-File "$checklistPath\$(hostname)_OpenPorts.txt"
     Show-Services | Out-File "$checklistPath\$(hostname)_RunningServices.txt"
-    Show-SoftwareInstalled | Out-File "$checklistPath\$(hostname)_InstalledSoftware.txt"
     Show-UserAccounts | Out-File "$checklistPath\$(hostname)_UserAccounts.txt"
     Show-ScheduledTasks | Out-File "$checklistPath\$(hostname)_ScheduledTasks.txt"
     Show-PSList | Out-File "$checklistPath\$(hostname)_ProcessList.txt"
     Show-PSTree | Out-File "$checklistPath\$(hostname)_ProcessTree.txt"
     Show-ExeFiles | Out-File "$checklistPath\$(hostname)_ExeFiles.txt"
     Show-CommandHistory | Out-File "$checklistPath\$(hostname)_commandhistory.txt"
+    Show-SoftwareInstalled | Out-File "$checklistPath\$(hostname)_InstalledSoftware.txt"
     Get-FirewallInfo | Out-File "$checklistPath\$(hostname)_FirewallInfo.txt"
     Write-Host "All data has been saved to $checklistPath" -ForegroundColor Green
 }
