@@ -15,7 +15,7 @@ if (!(Test-Path $checklistPath)) {
 # Function to display the menu
 function Show-Menu {
     Write-Host "===================== Windows Hardening Check Menu ====================="
-	Write-Host "1. Save All Data to Checklist Folder"
+    Write-Host "1. Save All Data to Checklist Folder"
     Write-Host "2. System Overview"
     Write-Host "3. Show Network Interfaces and IPs"
     Write-Host "4. Show Open Ports"
@@ -156,8 +156,8 @@ Function Save-AllData {
     Show-ScheduledTasks | Out-File "$checklistPath\$(hostname)_ScheduledTasks.txt"
     Show-PSList | Out-File "$checklistPath\$(hostname)_ProcessList.txt"
     Show-PSTree | Out-File "$checklistPath\$(hostname)_ProcessTree.txt"
-	Show-ExeFiles | Out-File "$checklistPath\$(hostname)_ExeFiles.txt"
-	Show-CommandHistory | Out-File "$checklistPath\$(hostname)_commandhistory.txt"
+    Show-ExeFiles | Out-File "$checklistPath\$(hostname)_ExeFiles.txt"
+    Show-CommandHistory | Out-File "$checklistPath\$(hostname)_commandhistory.txt"
     Get-FirewallInfo | Out-File "$checklistPath\$(hostname)_FirewallInfo.txt"
     Write-Host "All data has been saved to $checklistPath" -ForegroundColor Green
 }
@@ -180,8 +180,8 @@ Do {
         "9" { Show-PSList | Write-Host }
         "10" { Show-PSTree | Write-Host }
         "11" { Get-FirewallInfo | Write-Host }
-		"12" { Show-CommandHistory | Write-Host }
-		"13" { Show-ExeFiles | Write-Host }
+	"12" { Show-CommandHistory | Write-Host }
+	"13" { Show-ExeFiles | Write-Host }
         "Q" { Write-Host "\nExiting... Stay safe, Coastline Xploit Club!" -ForegroundColor Green; Exit }
         Default { Write-Host "\nInvalid option! Please choose between 1-13." -ForegroundColor Red }
     }
