@@ -1,7 +1,7 @@
 # CCDC Checklist Linux Version
 
-> ℹ️ Many tasks are scripted [here](https://raw.githubusercontent.com/Coastline-XploitClub/CCDC/refs/heads/main/CCDC_2024/linux/enumerator.sh)
-> ℹ️ Competition spreadsheet located [here](https://docs.google.com/spreadsheets/d/10Qm3FMyiZFMBjiOrrYPRss4SwUmUvym1zQl239Idh9I/edit?usp=sharing)
+> ℹ️ Many tasks are scripted [here](https://raw.githubusercontent.com/Coastline-XploitClub/CCDC/refs/heads/main/CCDC_2024/linux/enumerator.sh).
+> ℹ️ Competition spreadsheet located [here](https://docs.google.com/spreadsheets/d/10Qm3FMyiZFMBjiOrrYPRss4SwUmUvym1zQl239Idh9I/edit?usp=sharing).
 
 ## Machine info
 ✅ Record these in our team's competition spreadsheet (if it exists)
