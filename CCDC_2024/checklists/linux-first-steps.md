@@ -67,6 +67,12 @@ netstat -tulpn
 - Do any other **scored** or critical services on the network rely on this service/port being open?
 - ➡️ **If not, action should be taken after this checklist is completed.**
 
+Blocking ports
+```bash
+iptables -A INPUT -p tcp --destination-port <PORT> -j DROP  # iptables
+ufw deny <PORT>  # ufw
+```
+
 ---
 
 ## Interesting data locations
