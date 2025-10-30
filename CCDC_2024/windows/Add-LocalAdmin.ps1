@@ -1,6 +1,6 @@
 # script to add local administrators on each windows box, requires WINRM access from DC, Domain Admin login, AND MOST IMPORTANLY an OU created with servers you want to add local admins to
 
-$Names = @('kyle','ceasar', 'cam', 'marshall')
+$Names = @('kyle','cesar', 'cam', 'marshall')
 
 # check for ou argument
 if ($args.Count -ne 1){
